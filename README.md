@@ -11,5 +11,3 @@ React frontend with Spring Boot backend application running within a Docker cont
 ## Inside of a Docker container locally.
 ./gradlew clean build docker
 docker run -p 8080:8080 eagle-img
-
-
