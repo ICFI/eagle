@@ -6,7 +6,7 @@ React frontend with Spring Boot backend application running within a Docker cont
 ## To Use:
 
 ### Outside of Docker with embedded tomcat (preferred)
-./gradlew clean bootRun 
+* ./gradlew clean bootRun 
 
 ### Inside of a Docker container locally.
 * ./gradlew clean build docker
