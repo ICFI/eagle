@@ -5,9 +5,11 @@ React frontend with Spring Boot backend application running within a Docker cont
 
 ## To Use:
 
-## Outside of Docker with embedded tomcat (preferred)
+### Outside of Docker with embedded tomcat (preferred)
 ./gradlew clean bootRun 
 
-## Inside of a Docker container locally.
+### Inside of a Docker container locally.
 * ./gradlew clean build docker
 * docker run -p 8080:8080 eagle-img
+
+Navigate to application within browser at http://localhost:8080
