@@ -43,6 +43,62 @@ resource "aws_iam_policy" "instance_policy" {
   policy = "${data.aws_iam_policy_document.instance_policy.json}"
 }
 
+data "aws_region" "current" {}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_iam_policy_document" "jenkins_policy" {
+  statement {
+    sid = "EcsAll"
+    actions = [
+      "ecs:RegisterTaskDefinition",
+      "ecs:ListClusters",
+      "ecs:DescribeContainerInstances",
+      "ecs:ListTaskDefinitions",
+      "ecs:DescribeTaskDefinition",
+      "ecs:UpdateService",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:PutImage",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload"
+    ]
+    resources = [ "*" ]
+  }
+
+  statement {
+    sid = "EcsCluster"
+    actions = [
+      "ecs:StopTask",
+      "ecs:ListContainerInstances"
+    ]
+    resources = [ "${aws_ecs_cluster.ecs.arn}" ]
+  }
+
+  statement {
+    sid = "EcsRunTask"
+    actions = [ "ecs:RunTask" ]
+    resources = [ "arn:aws:ecs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:task-definition/ecs-jenkins-worker:*" ]
+  }
+
+  statement {
+    sid = "EcsTasks"
+    actions = [
+      "ecs:StopTask",
+      "ecs:DescribeTasks"
+    ]
+    resources = [ "arn:aws:ecs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:task/*" ]
+  }
+}
+
+resource "aws_iam_policy" "jenkins_policy" {
+  name   = "${var.name}-ecs-jenkins"
+  path   = "/"
+  policy = "${data.aws_iam_policy_document.jenkins_policy.json}"
+}
+
 resource "aws_iam_role" "instance" {
   name = "${var.name}-instance-role"
 
@@ -71,6 +127,11 @@ resource "aws_iam_role_policy_attachment" "ecs_policy" {
 resource "aws_iam_role_policy_attachment" "instance_policy" {
   role       = "${aws_iam_role.instance.name}"
   policy_arn = "${aws_iam_policy.instance_policy.arn}"
+}
+
+resource "aws_iam_role_policy_attachment" "jenkins_policy" {
+  role       = "${aws_iam_role.instance.name}"
+  policy_arn = "${aws_iam_policy.jenkins_policy.arn}"
 }
 
 resource "aws_iam_instance_profile" "instance" {
@@ -118,6 +179,7 @@ data "template_file" "user_data" {
   vars {
     additional_user_data_script = "${var.additional_user_data_script}"
     ecs_cluster                 = "${aws_ecs_cluster.ecs.name}"
+    efs_filesystem_id           = "${var.efs_volume_id}"
     log_group                   = "${aws_cloudwatch_log_group.instance.name}"
   }
 }

@@ -17,6 +17,41 @@
 * Build stage environment infrastructure
   * `terraform apply`
 
+### Configure
+
+* Update EFS throughput mode to something like 10MiB/s provisioned through the UI
+* Copy the public IP of the bastion host and configure an ssh connection
+* Copy the private IP of the ECS host and configure an ssh connection
+  * Example ssh config
+```
+Host bastion
+    HostName <EC2_PUBLIC_IP>
+    Port 443
+    IdentityFile ~/.ssh/<YOUR_KEY>.pem 
+
+Host ecs
+    HostName <EC2_PRIVATE_IP>
+    ProxyJump bastion
+    IdentityFile ~/.ssh/<YOUR_KEY>.pem
+
+Host *
+    User ec2-user
+    ServerAliveInterval 60
+```
+* (Optional) ssh into the ECS host and ensure the NFS filesystem has been mounted, this is done as part of the userdata script
+* (Optional) Monitor the status of the Jenkins container by periodically running `docker ps`
+  * Once it starts switch to `docker logs -f CONTAINER_ID` to see when it's finished bootstrapping
+  * If you wait ~5 minutes it will boostrap entirely on it's own the commands above are just if you want to follow along
+* Navigate to the public DNS name of the load balancer with /jenkins/ appended to get to the Jenkins UI
+* Create the Jenkins admin user with an initial password found in `~/mnt/efs/jenkins/secrets/initialAdminPassword`
+* Create a pipeline job for the eagle application
+  * Pipeline Definition: Pipeline script from SCM
+  * SCM: Git
+  * Repository URL: https://github.com/ICFI/eagle
+  * Save button
+  * Build Now left-hand menu link
+  
+
 ### Result
 
 At the end of the deployment the following resources will have been provisioned.
@@ -24,9 +59,13 @@ At the end of the deployment the following resources will have been provisioned.
 * VPC with two public and two private subnets
 * An optional bastion host which allows for console access to resources in private subnets
 * An ECS cluster provisioned within the private subnet
-* An Nginx container
+* A Jenkins container with a JENKINS_HOME directory mounted from an EFS volume to persist state
+* An eagle container built from the source at the root of this project
 * An application load balancer
 
-EC2 -> Load Balancers link in the left-hand menu -> Select the ALB and copy the DNS hostname to access Nginx
+### Links
+* EC2 -> Load Balancers link in the left-hand menu -> Select the ALB and copy the DNS name
+* **/jenkins/** - to access jenkins
+* **/** - access application once first build has successfully completed
 
 ![architecture](diagrams/architecture.png)

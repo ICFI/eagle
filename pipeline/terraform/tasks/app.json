@@ -7,7 +7,7 @@
     "name": "${container_name}",
     "portMappings": [
       {
-        "containerPort": 80
+        "containerPort": 8080
       }
     ]
   }

@@ -1,5 +1,5 @@
 variable "additional_user_data_script" {
-  description = "Additional user data script (default=\"\")"
+  description = "Additional user data script"
   default     = ""
 }
 
@@ -16,6 +16,10 @@ variable "asg_min_size" {
 variable "asg_desired_size" {
   description = "Desired number of instances"
   default     = 1
+}
+
+variable "efs_volume_id" {
+  description = "efs volume id"
 }
 
 variable "instance_keypair" {
@@ -48,6 +52,7 @@ variable "network_prefix" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
+  type = "map"
   default     = {}
 }
 
@@ -57,5 +62,6 @@ variable "vpc_id" {
 
 variable "vpc_subnets" {
   description = "List of VPC subnets to put instances in"
-  default     = []
+  type = "list"
+  default = []
 }
