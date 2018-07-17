@@ -21,7 +21,7 @@ After starting the app, a temp password will be generated to secure REST endpoin
 curl -u user:<password> http://localhost:8080/movie
 
 ### Documentation
-AsciiDoc is used easily generate lightweight documentation to describe all critical aspects of the project.  It requires asciidoc to generate and serve documentation with the following commands.
+AsciiDoc easily generates lightweight documentation to describe all critical aspects of the project.  Asciidoc generate and serve documentation with the following commands.
 * Build documentation - run './gradlew asciidoctor'
 * View documentation - go to the '/eagle/build/asciidoc/html5/index.html' file within a web browser
 
