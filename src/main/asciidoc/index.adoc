@@ -1,0 +1,17 @@
+# Eagle Project
+
+## Overview
+
+## Technologies
+
+## Design
+
+## Security
+
+## Interfaces
+include::../../../build/generated-snippets/movies/request-body.adoc[]
+include::../../../build/generated-snippets/movies/response-body.adoc[]
+
+include::../../../build/generated-snippets/movies/http-request.adoc[]
+include::../../../build/generated-snippets/movies/curl-request.adoc[]
+include::../../../build/generated-snippets/movies/http-response.adoc[]
