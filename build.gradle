@@ -1,6 +1,7 @@
 buildscript {
   ext {
     springBootVersion = '2.0.3.RELEASE'
+    lombokVersion = '1.16.20'
   }
   repositories {
     maven {
@@ -35,7 +36,10 @@ repositories {
 dependencies {
   compile 'org.springframework.boot:spring-boot-devtools'
   compile 'org.springframework.boot:spring-boot-starter-web'
-  compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+  compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+  compile 'org.springframework.boot:spring-boot-starter-security'
+  // Newer lombok versions are lacking Java9 support
+  compile 'org.projectlombok:lombok:1.16.20'
 }
 
 docker {
