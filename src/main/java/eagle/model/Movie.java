@@ -8,16 +8,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Basic data model for REST services to extend and use.
- * Uses lombok to pump easy POJOs.
+ * Basic data model for REST services to extend and use. Uses lombok to pump
+ * easy POJOs.
  *
  */
 @Data
 @SuppressWarnings("unused")
 public class Movie {
- 
-	private String title;   
+
+	private String title;
 	private Date publishedDate;
-    private String rating;
- 
+	private String rating;
+
 }
