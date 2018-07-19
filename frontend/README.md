@@ -106,9 +106,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Dependencies
 
-Prettier is an opinionated code formatter with support for JavaScript, CSS and JSON. With Prettier you can format the code you write automatically to ensure a code style within your project. See the [Prettier's GitHub page](https://github.com/prettier/prettier) for more information, and look at this [page to see it in action](https://prettier.github.io/prettier/).
-
-To format our code whenever we make a commit in git, we need to install the following dependencies:
+Below are all the additonal NPM modules requied for the app to function:
 
 ```sh
 npm install --save create-react-app
