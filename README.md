@@ -1,7 +1,9 @@
 # Eagle project
 
-## Details
+## Project Overview
 React frontend with Spring Boot backend application running within a Docker container "microservice".
+
+## [Eagle System Documentation](https://github.com/ICFI/eagle/documentation/html5/index.html)
 
 ## How to Use:
 
@@ -20,5 +22,3 @@ React frontend with Spring Boot backend application running within a Docker cont
 
 ### To build and run app within AWS environment (stage/prod)
 * TODO - Add Terreform commands
-
-### [Eagle System Documentation](https://github.com/ICFI/eagle/documentation/html5/index.html)
