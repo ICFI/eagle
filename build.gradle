@@ -36,14 +36,23 @@ repositories {
 }
 
 dependencies {
+  // Spring Boot
   compile 'org.springframework.boot:spring-boot-devtools'
   compile 'org.springframework.boot:spring-boot-starter-web'
   compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
   compile 'org.springframework.boot:spring-boot-starter-security'
-  // Newer lombok versions are lacking Java9 support
+  compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+  
+  // Database - H2 by default
+  compile("com.h2database:h2")
+  
+  // Lombok - Newer lombok versions are lacking Java9 support
   compile 'org.projectlombok:lombok:1.16.20'
+  
+  // Asciidoc
   compile 'org.springframework.restdocs:spring-restdocs-asciidoctor'
   
+  // Test
   testCompile 'org.springframework.boot:spring-boot-starter-test'
   testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
@@ -64,8 +73,9 @@ test {
 	outputs.dir snippetsDir
 }
 
-asciidoctor { 
+asciidoctor {     
 	inputs.dir snippetsDir 
 	dependsOn test 
 	sourceDir 'src/main/asciidoc'
+	outputDir 'documentation'
 }
