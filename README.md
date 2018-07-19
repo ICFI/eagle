@@ -3,7 +3,7 @@
 ## Project Overview
 React frontend with Spring Boot backend application running within a Docker container "microservice".
 
-[System Documentation](https://github.com/ICFI/eagle/documentation/pdf/index.pdf)
+[System Documentation](https://github.com/ICFI/eagle/blob/master/documentation/pdf/index.pdf)
 
 ## How to Use:
 
