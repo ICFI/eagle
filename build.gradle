@@ -12,6 +12,7 @@ buildscript {
     classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.1")
     classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
+    classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
   }
 }
 
@@ -73,7 +74,8 @@ test {
 	outputs.dir snippetsDir
 }
 
-asciidoctor {     
+asciidoctor {   
+    backends 'pdf'  
 	inputs.dir snippetsDir 
 	dependsOn test 
 	sourceDir 'src/main/asciidoc'

@@ -14,7 +14,7 @@ ReactJS,blahblah
 
 == Design
 === System Architecture
-image::../../pipeline/diagrams/architecture.png[]
+image::../../../pipeline/diagrams/architecture.png[]
 
 == Security
 
