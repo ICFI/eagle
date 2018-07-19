@@ -1,4 +1,0 @@
-npm install --save react-router-dom
-npm install --save auth0-js
-npm install --save history
-npm install --save react-bootstrap
