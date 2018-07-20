@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 /**
@@ -24,6 +26,7 @@ public class Movie {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String title;
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="UTC")
 	private Date publishedDate;
 	private String rating;
 
