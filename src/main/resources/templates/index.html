@@ -1,58 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<html>
-		<head>
-			<title>Eagle</title>
-		</head>
-		<body>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.1/umd/react.production.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.1/umd/react-dom.production.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"</link>
+<html>
 
-			<script type="text/babel">
-				class Clock extends React.Component {
-				  constructor(props) {
-				    super(props);
-				    this.state = {date: new Date()};
-				  }
-				
-				  componentDidMount() {
-				    this.timerID = setInterval(
-				      () => this.tick(),
-				      1000
-				    );
-				  }
-				
-				  componentWillUnmount() {
-				    clearInterval(this.timerID);
-				  }
-				
-				  tick() {
-				    this.setState({
-				      date: new Date()
-				    });
-				  }
-				
-				  render() {
-				    return (
-				      <div>
-				        <h1>Hello, Eagle!</h1>
-				        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-				      </div>
-				    );
-				  }
-				}
-				
-				ReactDOM.render(
-				  <Clock />,
-				  document.getElementById('root')
-				);
-            </script>
+<head>
+    <title>Eagle</title>
+</head>
 
-            <div id='root'></div>
-		</body>
-	</html>
+<body>
+
+    <div id='root'></div>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="bundle.js"></script>
+</body>
+
+</html>

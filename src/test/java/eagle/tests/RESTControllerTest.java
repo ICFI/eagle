@@ -70,7 +70,7 @@ public class RESTControllerTest {
 	}
 
 	@Test
-	public void testGetMethod() throws Exception {
+	public void testGetAllMethod() throws Exception {
 		// Mock database vals so no dependence on db for tests
 		Movie movie = new Movie();
 		movie.setId(1);
@@ -81,7 +81,7 @@ public class RESTControllerTest {
 
 		Mockito.when(movieRepository.findById(new Integer(1))).thenReturn(optMovie);
 
-		this.mvc.perform(get("/movie").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		this.mvc.perform(get("/api/movies").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(document("movies"));
 	}
 
@@ -91,7 +91,7 @@ public class RESTControllerTest {
 		testMovie.setId(1);
 		testMovie.setTitle("testTitle");
 
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/movie").accept(MediaType.APPLICATION_JSON)
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/movie").accept(MediaType.APPLICATION_JSON)
 				.content(convertObjectToJsonBytes(testMovie)).contentType(MediaType.APPLICATION_JSON);
 
 		MvcResult result = this.mvc.perform(requestBuilder).andReturn();

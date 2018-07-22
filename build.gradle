@@ -13,6 +13,7 @@ buildscript {
     classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.1")
     classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
     classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
+    classpath "gradle.plugin.us.ascendtech:gwt-gradle:0.2.3"
   }
 }
 
@@ -23,6 +24,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.palantir.docker'
 apply plugin: 'org.asciidoctor.convert'
+apply plugin: "us.ascendtech.js.npm"
 
 jar {
   baseName = 'eagle'
@@ -83,3 +85,13 @@ asciidoctor {
 	sourceDir 'src/main/asciidoc'
 	outputDir 'documentation'
 }
+
+task copyBundle(type: Copy) {
+    from file("build/js/bundle.js")
+    into file("src/main/resources/public")
+}
+
+// Build task ordering
+build.dependsOn webpack
+build.dependsOn copyBundle
+copyBundle.mustRunAfter webpack
