@@ -5,6 +5,8 @@ export default {
 		callbackUrl: 'http://localhost:8080/callback'
 	},
 	api: {
-		url: 'http://localhost:8080/api/movies'
+		getUrl: 'http://localhost:8080/api/movies',
+		postUrl: 'http://localhost:8080/api/movie',
+		deleteUrl: 'http://localhost:8080/api/movie'
 	}
 };

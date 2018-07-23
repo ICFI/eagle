@@ -9,7 +9,7 @@ class Home extends Component {
 		const { isAuthenticated } = this.props.auth;
 
 		return (
-			<Grid fluid>
+			<Grid>
 				<Row>
 					<Col xs={12} md={12}>
 					<h4>Home</h4>

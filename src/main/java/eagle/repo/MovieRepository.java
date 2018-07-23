@@ -9,6 +9,6 @@ import eagle.model.Movie;
  * Boot. Additional database methods can be added here.
  *
  */
-public interface MovieRepository extends CrudRepository<Movie, Integer> {
+public interface MovieRepository extends CrudRepository<Movie, Long> {
 
 }

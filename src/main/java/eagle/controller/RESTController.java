@@ -1,6 +1,7 @@
 package eagle.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class RESTController {
 	@ResponseStatus( HttpStatus.CREATED )
 	public Movie post(@RequestBody Movie movie) {
 
+		movieRepository.save(movie);
 		// Just reflect response to show post success
 		return movie;
 	}
