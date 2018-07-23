@@ -22,9 +22,9 @@ import lombok.Data;
 @Entity
 public class Movie {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String title;
 	@JsonFormat(pattern="yyyy-MM-dd", timezone="UTC")
 	private Date publishedDate;

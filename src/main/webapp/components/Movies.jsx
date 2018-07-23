@@ -1,44 +1,76 @@
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import {Form, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import axios from 'axios';
 import config from '../config.js';
 
 class Movies extends Component {
 	constructor(props) {
-		super(props)
-		this.state = {}
-
-		this.performSearch()
+		super(props);
+		this.state = {
+			movies: [],
+			movie: { title: new String(), rating: new String() }
+		};
 	}
-    
-	performSearch() {
-		const urlString = config.api.url
 
-		fetch(urlString)
-			.then(res => res.json())
-			.then((result) => {
-				const results = result
+	componentDidMount() {
+		this.performSearch();
+    }
 
-				this.setState({
-					isLoaded: true,
-					rows: results
-				});
-			},
-			(error) => {
-				this.setState({
-					isLoaded: true,
-					error
-				});
+    componentDidUpdate()
+    {
+    	this.performSearch();
+    }
+
+    performSearch ()
+    {
+    	const urlString = config.api.getUrl;
+    	axios.get(urlString)
+			.then(res => {
+				this.setState({ movies : res.data});
+			})
+			.catch(function (error) {
+				console.log(error);
 			}
-		)
+		);
     }
     
+    onDeleteRow(rows)
+    {
+    	console.log ("DELETE");
+    }
+
+    onAddRow(row) {
+    	const urlString = config.api.postUrl;
+    	const title = row.title;
+    	const rating = row.rating;
+
+	    axios.post(urlString, { title, rating })
+	      	.then((result) => {
+		      	//Just checking response in dev
+		      	console.log(result);
+	    	})
+	      	.catch(function (error) {
+				console.log(error);
+			}
+		);
+	}
+
     render() {
+    	const options = {
+    		onDeleteRow: this.onDeleteRow,
+    		onAddRow: this.onAddRow
+  		};
+    	const selectRow = {
+    		mode: 'checkbox', 
+    		clickToSelect: true
+  		};
         return (
-			<BootstrapTable data={this.state.rows} striped hover>
-				<TableHeaderColumn isKey dataField='id' dataSort={ true }>ID</TableHeaderColumn>
-				<TableHeaderColumn dataField='title' dataSort={ true }>Title</TableHeaderColumn>
-				<TableHeaderColumn dataField='rating' dataSort={ true }>Rating</TableHeaderColumn>
-			</BootstrapTable>
+				<BootstrapTable data={this.state.movies} deleteRow selectRow={ selectRow } options={ options } insertRow exportCSV striped hover>
+					<TableHeaderColumn hidden hiddenOnInsert dataAlign='left' isKey dataField='id' dataSort={ true }>ID</TableHeaderColumn>
+					<TableHeaderColumn dataAlign='left' dataField='title' dataSort={ true }>Title</TableHeaderColumn>
+					<TableHeaderColumn dataAlign='left' dataField='rating' dataSort={ true }>Rating</TableHeaderColumn>
+				</BootstrapTable>
         );
     }
 }

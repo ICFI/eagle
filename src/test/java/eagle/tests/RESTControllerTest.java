@@ -73,13 +73,13 @@ public class RESTControllerTest {
 	public void testGetAllMethod() throws Exception {
 		// Mock database vals so no dependence on db for tests
 		Movie movie = new Movie();
-		movie.setId(1);
+		movie.setId(new Long(1));
 		movie.setPublishedDate(new Date());
 		movie.setRating("A++");
 		movie.setTitle("Indiana Jones");
 		Optional<Movie> optMovie = Optional.of(movie);
 
-		Mockito.when(movieRepository.findById(new Integer(1))).thenReturn(optMovie);
+		Mockito.when(movieRepository.findById(new Long(1))).thenReturn(optMovie);
 
 		this.mvc.perform(get("/api/movies").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(document("movies"));
@@ -88,7 +88,7 @@ public class RESTControllerTest {
 	@Test
 	public void testPostMethod() throws Exception {
 		Movie testMovie = new Movie();
-		testMovie.setId(1);
+		testMovie.setId(new Long(1));
 		testMovie.setTitle("testTitle");
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/movie").accept(MediaType.APPLICATION_JSON)
