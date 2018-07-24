@@ -1,3 +1,5 @@
+// Shows examples REST interaction and use of Bootstrap Table methods
+
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {Form, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
@@ -35,9 +37,20 @@ class Movies extends Component {
 		);
     }
     
-    onDeleteRow(rows)
+    onDeleteRow(row)
     {
-    	console.log ("DELETE");
+    	const urlString = config.api.deleteUrl;
+
+    	console.log (row);
+    	axios.delete(urlString + "/" + row)
+	      	.then((result) => {
+		      	//Just checking response in dev
+		      	console.log(result);
+	    	})
+	      	.catch(function (error) {
+				console.log(error);
+			}
+		);
     }
 
     onAddRow(row) {

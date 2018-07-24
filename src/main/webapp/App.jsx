@@ -7,6 +7,7 @@ import Footer from './components/Footer.jsx';
 import Home from './components/Home.jsx';
 import Callback from './components/Callback.jsx';
 import Movies from './components/Movies.jsx';
+import Adder from './components/Adder.jsx';
 import Auth from './Auth.js';
 import history from './history';
 
@@ -36,6 +37,17 @@ class App extends Component {
                             render={props =>
                             auth.isAuthenticated() ? (
                                 <Movies exact {...props} />
+                            ) : (
+                                <Redirect to="/home"/>
+                            )
+                            }
+                        />
+                        <Route
+                            exact
+                            path="/adder"
+                            render={props =>
+                            auth.isAuthenticated() ? (
+                                <Adder exact {...props} />
                             ) : (
                                 <Redirect to="/home"/>
                             )
