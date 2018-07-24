@@ -100,6 +100,17 @@ public class RESTControllerTest {
 		
 		assertEquals(HttpStatus.CREATED.value(), response.getStatus());
 	}
+	
+	@Test
+	public void testDeleteMethod() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/movie/99").accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = this.mvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+		
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
 
 	private static byte[] convertObjectToJsonBytes(Object object) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
