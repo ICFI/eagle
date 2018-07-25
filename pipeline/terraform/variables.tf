@@ -8,6 +8,10 @@ variable "create_bastion" {
   default = false
 }
 
+variable "certificate_arn" {
+  description = "HTTPS certificate ARN from the AWS Certificate Manager service"
+}
+
 variable "ecs_instance_type" {
   description = "ec2 instance type used by ecs container hosts"
   default = "t2.large"
