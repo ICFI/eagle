@@ -143,7 +143,7 @@ resource "aws_lb_listener_rule" "jenkins" {
 
   condition {
     field  = "path-pattern"
-    values = ["/jenkins/*"]
+    values = ["/jenkins*"]
   }
 }
 
