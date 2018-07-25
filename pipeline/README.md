@@ -33,7 +33,7 @@
     
     Host eagle-ecs
         HostName <EC2_PRIVATE_IP>
-        ProxyJump bastion
+        ProxyJump eagle-bastion
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
     
     Host eagle-*
