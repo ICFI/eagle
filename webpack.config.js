@@ -1,4 +1,5 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/main/webapp/index.js',
@@ -11,10 +12,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-          	"presets": ["react", "es2015", "stage-1"]
-          }
+          loader: "babel-loader"
         }
       },
       {
@@ -33,9 +31,12 @@ module.exports = {
       }
     ]
   },
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin()
-    ]
-  }
+  plugins: [
+    new UglifyJsPlugin({
+        sourceMap: true
+    }),
+    new webpack.DefinePlugin({
+       'process.env.NODE_ENV': JSON.stringify('production')
+    })
+  ]
 };
