@@ -1,6 +1,13 @@
 
 ### Setup
 
+* Configure DNS using a Route53 hosted domain
+  * Create a new hosted domain in the challenge account that's a subdomain of a domain we already own
+  * Create a delegation record in the parent domain/zone
+    * Copy the NS records from the new subdomain and make a new NS record in the parent domain delegating control of the subdomain
+* Request a new star cert from Amazon Certificate Manager
+  * Use the blue, "Easy button" to create the proof of domain ownership DNS record
+  * Once issued the ARN of the cert will be passed to the terraform templates via an environment variable
 * [Create an EC2 SSH keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 * Initialize the terraform project and set up multiple environments
   * `cd pipeline/terraform`
@@ -50,8 +57,9 @@
   ```
 * (Optional) Monitor the status of the Jenkins container by periodically running `docker ps`
   * Once it starts switch to `docker logs -f CONTAINER_ID` to see when it's finished bootstrapping
-  * If you wait ~5 minutes it will boostrap entirely on it's own the commands above are just if you want to follow along
-* Navigate to the public DNS name of the load balancer with `/jenkins/` appended to get to the Jenkins UI
+  * If you wait ~5 minutes it will bootstrap entirely on its own, the commands above are just if you want to follow along 
+* Create a new A/Alias record that points at either the apex (blank) for prod or a specific environment name like stage to the load balancer
+* Navigate to the `/jenkins` context on the load balancer using the DNS name we configured in the last step
 * Create the Jenkins admin user with an initial password found with
   ```sh
   sudo cat /mnt/efs/jenkins/secrets/initialAdminPassword
