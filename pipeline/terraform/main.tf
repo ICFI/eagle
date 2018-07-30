@@ -309,3 +309,69 @@ module "bastion" {
   subnet_id = "${module.vpc.public_subnets[0]}"
   vpc_id = "${module.vpc.vpc_id}"
 }
+
+// ~~~ RDS-Mysql ~~~
+
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnet_ids" "all" {
+  vpc_id = "${data.aws_vpc.default.id}"
+}
+
+data "aws_security_group" "default" {
+  vpc_id = "${data.aws_vpc.default.id}"
+  name   = "default"
+}
+
+module "rds" {
+  source  = "terraform-aws-modules/rds/aws"
+  version = "1.19.0"
+
+  # insert the 10 required variables here
+  identifier = "${var.identifier}"
+  engine            = "${var.engine}"
+  engine_version    = "${var.engine_version}"
+  instance_class    = "${var.instance_class}"
+  allocated_storage = "${var.allocated_storage}"
+  storage_encrypted = "${var.storage_encrypted}"
+  maintenance_window = "${var.maintenance_window}"
+  backup_window      = "${var.backup_window}"
+  username = "${var.username}"
+  password = "${var.password}"
+  port     = "${var.port}"
+  iam_database_authentication_enabled = true
+  vpc_security_group_ids = ["${aws_security_group.lb_sg.id}"]
+#["${data.aws_security_group.default.id}"]
+  backup_retention_period = 0
+
+  tags = {
+    Name       = "${local.resource_label}"
+    Environment = "${terraform.env}"
+  }
+
+  # DB subnet group
+  subnet_ids = ["${module.vpc.private_subnets}"]
+#["${data.aws_subnet_ids.all.ids}"]
+
+  # DB parameter group
+  family = "mysql5.7"
+
+  # DB option group
+  major_engine_version = "5.7"
+
+  # Snapshot name upon DB deletion
+  final_snapshot_identifier = "${var.identifier}"
+
+ parameters = [
+    {
+      name = "character_set_client"
+      value = "utf8"
+    },
+    {
+      name = "character_set_server"
+      value = "utf8"
+    }
+  ]
+}
