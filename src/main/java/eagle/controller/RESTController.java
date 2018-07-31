@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +27,7 @@ public class RESTController {
 	MovieRepository movieRepository;
 
 	@GetMapping(value = "/api/movies")
-	public @ResponseBody List<Movie> getAll() {
+	public List<Movie> getAll() {
 
 		// Get first record in DB based on data load in resources/data.sql
 		return (ArrayList<Movie>) movieRepository.findAll();
@@ -45,8 +44,8 @@ public class RESTController {
 	
 	@DeleteMapping(value = "/api/movie/{id}")
 	@ResponseStatus( HttpStatus.OK )
-	public void delete(@PathVariable Integer id) {
+	public void delete(@PathVariable Long id) {
 
-		movieRepository.deleteById(new Long(id));;
+		movieRepository.deleteById(id);
 	}
 }

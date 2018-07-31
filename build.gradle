@@ -1,19 +1,16 @@
 buildscript {
-  ext {
-    springBootVersion = '2.0.3.RELEASE'
-    lombokVersion = '1.16.20'
-  }
   repositories {
     maven {
       url "https://plugins.gradle.org/m2/"
     }
   }
   dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
     classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.1")
     classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
-    classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
-    classpath "gradle.plugin.us.ascendtech:gwt-gradle:0.2.3"
+    classpath("org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15")
+    classpath("gradle.plugin.us.ascendtech:gwt-gradle:0.2.3")
+    classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2")
   }
 }
 
@@ -25,6 +22,10 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.palantir.docker'
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'us.ascendtech.js.npm'
+apply plugin: 'org.sonarqube'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: "jacoco"
 
 jar {
   baseName = 'eagle'
@@ -89,6 +90,38 @@ asciidoctor {
 task copyBundle(type: Copy) {
     from file("build/js/bundle.js")
     into file("src/main/resources/public")
+}
+
+findbugs{
+    findbugsTest.enabled=false
+    ignoreFailures = true
+}
+
+pmd {
+    pmdTest.enabled=false
+    ignoreFailures = true
+}
+
+sonarqube{
+	properties {
+        property "sonar.scm.disabled", "true"
+    }
+}
+
+task staticAnalysis {
+	dependsOn tasks.withType(FindBugs)
+	dependsOn tasks.withType(Pmd)
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                // Verify 80% test coverage limit
+                minimum = 0.8
+            }
+        }
+    }
 }
 
 // Build task ordering
