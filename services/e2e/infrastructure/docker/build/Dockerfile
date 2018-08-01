@@ -40,7 +40,7 @@ RUN useradd headless --shell /bin/bash --create-home \
 
 USER root
 COPY . /src
-COPY example /tests
+COPY ../../tests /tests
 VOLUME /tests
 WORKDIR /src
 
