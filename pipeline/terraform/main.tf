@@ -181,10 +181,10 @@ resource "aws_alb" "main" {
 
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = "${aws_alb.main.id}"
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "${var.certificate_arn}"
+  port              = "80"
+  protocol          = "HTTP"
+  #ssl_policy        = "ELBSecurityPolicy-2016-08"
+  #certificate_arn   = "${var.certificate_arn}"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.eagle.id}"
@@ -200,8 +200,8 @@ resource "aws_security_group" "lb_sg" {
 
   ingress {
     protocol    = "tcp"
-    from_port   = 443
-    to_port     = 443
+    from_port   = 80
+    to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -330,18 +330,21 @@ module "rds" {
   version = "1.19.0"
 
   # insert the 10 required variables here
-  identifier = "${var.identifier}"
-  engine            = "${var.engine}"
-  engine_version    = "${var.engine_version}"
-  instance_class    = "${var.instance_class}"
-  allocated_storage = "${var.allocated_storage}"
-  storage_encrypted = "${var.storage_encrypted}"
-  maintenance_window = "${var.maintenance_window}"
-  backup_window      = "${var.backup_window}"
-  username = "${var.username}"
-  password = "${var.password}"
-  port     = "${var.port}"
-  iam_database_authentication_enabled = true
+  identifier = "${var.project}-${var.rds_identifier}"
+  engine            = "${var.rds_engine}"
+  engine_version    = "${var.rds_engine_version}"
+  instance_class    = "${var.rds_instance_class}"
+  allocated_storage = "${var.rds_allocated_storage}"
+  storage_encrypted = "${var.rds_storage_encrypted}"
+  maintenance_window = "${var.rds_maintenance_window}"
+  backup_window      = "${var.rds_backup_window}"
+  name = "${var.project}_${var.rds_db_name}"
+  username = "${var.rds_su_username}"
+  password = "${var.rds_su_password}"
+  port     = "${var.rds_port}"
+  multi_az = "${var.rds_multi_az}"
+  publicly_accessible = false
+  #iam_database_authentication_enabled = true
   vpc_security_group_ids = ["${aws_security_group.lb_sg.id}"]
 #["${data.aws_security_group.default.id}"]
   backup_retention_period = 0
@@ -352,7 +355,7 @@ module "rds" {
   }
 
   # DB subnet group
-  subnet_ids = ["${module.vpc.private_subnets}"]
+  subnet_ids = ["${module.vpc.public_subnets}"]
 #["${data.aws_subnet_ids.all.ids}"]
 
   # DB parameter group
@@ -362,7 +365,7 @@ module "rds" {
   major_engine_version = "5.7"
 
   # Snapshot name upon DB deletion
-  final_snapshot_identifier = "${var.identifier}"
+  final_snapshot_identifier = "${var.project}-${var.rds_identifier}"
 
  parameters = [
     {
