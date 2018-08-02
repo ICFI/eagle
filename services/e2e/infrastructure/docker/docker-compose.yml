@@ -3,7 +3,7 @@ version: "3.6"
 services:
   e2e:
     build:
-      context: ./build
+      context: .
     image: "e2e"
     container_name: e2e
 #    environment:
