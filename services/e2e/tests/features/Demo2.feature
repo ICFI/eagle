@@ -4,7 +4,7 @@ Feature:
   Background:
     Given I am on the application page.
 
-  Scenario Outline: Start Date
+  Scenario: Start Date
     When I have entered a Start Date
       And I have entered an End Date
       And I have clicked submit
