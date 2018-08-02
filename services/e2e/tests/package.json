@@ -8,7 +8,7 @@
     "build": "tsc",
     "clean": "rimraf typeScript/",
     "clean-build": "npm run clean && npm run build",
-    "init-contributors":"all-contributors init",
+    "init-contributors": "all-contributors init",
     "add-contributors": "all-contributors add",
     "generate-contributors": "all-contributors generate",
     "test": "protractor typeScript/config/config.js",

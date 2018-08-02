@@ -1,6 +1,6 @@
 import * as path from "path";
 import { browser, Config } from "protractor";
-import { Reporter } from "../support/reporter";
+import { Reporter } from "..//support/reporter";
 const jsonReports = process.cwd() + "/reports/json";
 
 export const config: Config = {
@@ -19,7 +19,7 @@ export const config: Config = {
     frameworkPath: require.resolve("protractor-cucumber-framework"),
 
     specs: [
-        "../../features/*.feature",
+        "../../features/**/*.feature",
     ],
 
     onPrepare: () => {
@@ -31,7 +31,7 @@ export const config: Config = {
     cucumberOpts: {
         compiler: "ts:ts-node/register",
         format: "json:./reports/json/cucumber_report.json",
-        require: ["../../typeScript/stepdefinitions/*.js", "../../typeScript/support/*.js"],
+        require: ["../../typeScript/step_definitions/*.js", "../../typeScript/support/*.js"],
         strict: true,
         //tags: "@CucumberScenario or @ProtractorScenario or @TypeScriptScenario or @OutlineScenario",
     },

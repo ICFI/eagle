@@ -39,7 +39,7 @@ RUN useradd headless --shell /bin/bash --create-home \
   && echo 'headless:nopassword' | chpasswd
 
 USER root
-COPY . /src
+COPY config /src
 COPY ../../tests /tests
 VOLUME /tests
 WORKDIR /src
