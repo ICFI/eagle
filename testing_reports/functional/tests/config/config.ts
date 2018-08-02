@@ -9,7 +9,7 @@ export const config: Config = {
 
     SELENIUM_PROMISE_MANAGER: false,
 
-    baseUrl: "https://www.google.com",
+    baseUrl: "https://stage.eagle.e3si.icfcloud.com/",
 
     capabilities: {
         browserName: "chrome",
