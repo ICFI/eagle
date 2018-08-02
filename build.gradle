@@ -105,6 +105,8 @@ pmd {
 sonarqube{
 	properties {
         property "sonar.scm.disabled", "true"
+        property "sonar.sources", "src/main"
+        property "sonar.javascript.file.suffixes", ".js,.jsx"
     }
 }
 
