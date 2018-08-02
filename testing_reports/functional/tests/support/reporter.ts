@@ -8,9 +8,16 @@ const targetJson = jsonReports + "/cucumber_report.json";
 
 const cucumberReporterOptions = {
     jsonFile: targetJson,
-    output: htmlReports + "/cucumber_reporter.html",
+    theme: "hierarchy",
+    jsonFile: targetJson,
+    output: htmlReports + "/index.html",
     reportSuiteAsScenarios: true,
-    theme: "bootstrap",
+    screenshotsDirectory: 'screenshots',
+    storeScreenshots: true,
+    brandTitle: "ICF Proposal E2E Tests",
+    metadata: {
+        "Project":  "USCIS - xxxxxxxxxxx"
+    }
 };
 
 export class Reporter {
