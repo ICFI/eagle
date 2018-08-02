@@ -33,8 +33,11 @@ class Header extends Component {
 								{isAuthenticated() && (
 									<Button	id="qsMoviesBtn" bsStyle="success" onClick={this.goTo.bind(this, "movies")}>Movies</Button>
 								)}
+							    {isAuthenticated() && (
+									<Button	id="qsTaskerBtn" bsStyle="success" onClick={this.goTo.bind(this, "tasker")}>Tasker</Button>
+								)}
 								{isAuthenticated() && (
-									<Button	id="qsAdderBtn" bsStyle="success" onClick={this.goTo.bind(this, "adder")}>Adder</Button>
+									<Button	id="qsAdderBtn" bsStyle="success" onClick={this.goTo.bind(this, "adder")}>Tasker</Button>
 								)}
 								{!isAuthenticated() && (
 									<Button	id="qsLoginBtn"	bsStyle="primary" onClick={this.login.bind(this)}>Log In</Button>

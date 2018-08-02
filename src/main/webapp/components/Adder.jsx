@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {Form, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Feedback, Well} from 'react-bootstrap';
 import axios from 'axios';
 import config from '../config.js';
+import '../styles/main.css';
 
 class Adder extends Component {
 	constructor(props) {
@@ -63,39 +64,36 @@ class Adder extends Component {
     render() {
 
         return (
-        	<div>
-		      <form>
-		        <FormGroup
-		          controlId="formFieldOne"
-		          validationState={this.getValidationFieldOne()}
-		        >
-		          <ControlLabel>Field One</ControlLabel>
-		          <FormControl
-		            type="text"
-		            value={this.state.fieldOne}
-		            placeholder="Enter Number"
-		            onChange={this.handleChangeFieldOne}
-		          />
-		          <FormControl.Feedback />
-		          <HelpBlock>Validation is based on number length.</HelpBlock>
-		        </FormGroup>
-		        <FormGroup
-		          controlId="formFieldTwo"
-		          validationState={this.getValidationFieldTwo()}
-		        >
-		          <ControlLabel>Field Two</ControlLabel>
-		          <FormControl
-		            type="text"
-		            value={this.state.fieldTwo}
-		            placeholder="Enter Number"
-		            onChange={this.handleChangeFieldTwo}
-		          />
-		          <FormControl.Feedback />
-		          <HelpBlock>Validation is based on number length.</HelpBlock>
-		        </FormGroup>
-		      </form>
-		      <Well bsSize="large">{this.state.result}</Well>
-		    </div>
+
+		<div class="content-box">
+        <h1>Day Counter</h1>
+        <p>Welcome to Day Counter. Enter a start and end date to count the number of days in-between. </p>
+	        <div class="row">
+	            <div class="col-md-6">
+	                <form>
+	                    <div class="form-group">
+	                        <label>START DATE:</label>
+	                        <input type="date" class="form-control" placeholder="DD/MM/YYYY"/>
+	                                  <FormControl
+            type="date"
+            value={this.state.value}
+            placeholder="Enter text"/>
+	                    </div> 
+	                </form>
+	            </div> 
+	            <div class="col-md-6">
+	                <form>
+	                    <div class="form-group">
+	                        <label>END DATE:</label>
+	                        <input type="date" class="form-control" placeholder="DD/MM/YYYY"/>
+	                    </div> 
+	                </form>
+	            </div> 
+	            <div class="col-md-12">
+	                <button class="btn btn-primary" type="submit">SUBMIT</button>
+	            </div> 
+	        </div> 
+    	</div> 
         );
     }
 }

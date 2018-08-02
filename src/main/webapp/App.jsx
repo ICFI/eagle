@@ -8,6 +8,7 @@ import Home from './components/Home.jsx';
 import Callback from './components/Callback.jsx';
 import Movies from './components/Movies.jsx';
 import Adder from './components/Adder.jsx';
+//import Tasker from './components/Tasker.jsx';
 import Auth from './Auth.js';
 import history from './history';
 
@@ -53,6 +54,7 @@ class App extends Component {
                             )
                             }
                         />
+
                         <Redirect to="/home"/>
                     </Switch>
                     <Route path="/callback" render={(props) => {
