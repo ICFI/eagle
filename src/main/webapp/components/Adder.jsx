@@ -94,7 +94,7 @@ class Adder extends Component {
 		          <HelpBlock>Validation is based on number length.</HelpBlock>
 		        </FormGroup>
 		      </form>
-		      <Well bsSize="large">= {this.state.result}</Well>
+		      <Well bsSize="large">{this.state.result}</Well>
 		    </div>
         );
     }
