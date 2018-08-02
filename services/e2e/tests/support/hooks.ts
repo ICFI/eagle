@@ -3,9 +3,9 @@ import * as fs from "fs";
 import { browser } from "protractor";
 import { config } from "../config/config";
 
-BeforeAll({timeout: 100 * 1000}, async () => {
-    await browser.get(config.baseUrl);
-});
+// BeforeAll({timeout: 100 * 1000}, async () => {
+//     await browser.get(config.baseUrl);
+// });
 
 After(async function(scenario) {
     if (scenario.result.status === Status.FAILED) {

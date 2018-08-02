@@ -1,6 +1,6 @@
 import * as path from "path";
 import { browser, Config } from "protractor";
-import { Reporter } from "..//support/reporter";
+import { Reporter } from "../support/reporter";
 const jsonReports = process.cwd() + "/reports/json";
 
 export const config: Config = {
@@ -23,8 +23,8 @@ export const config: Config = {
     ],
 
     onPrepare: () => {
-        browser.ignoreSynchronization = true;
-        browser.manage().window().maximize();
+        // browser.ignoreSynchronization = true;
+        // browser.manage().window().maximize();
         Reporter.createDirectory(jsonReports);
     },
 
@@ -33,7 +33,7 @@ export const config: Config = {
         format: "json:./reports/json/cucumber_report.json",
         require: ["../../typeScript/step_definitions/*.js", "../../typeScript/support/*.js"],
         strict: true,
-        //tags: "@CucumberScenario or @ProtractorScenario or @TypeScriptScenario or @OutlineScenario",
+        //tags: "@validation",
     },
 
     onComplete: () => {

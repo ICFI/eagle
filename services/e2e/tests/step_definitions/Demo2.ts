@@ -11,6 +11,31 @@ let BASEURL = browser.baseUrl;
 defineSupportCode(function ({Given, When, Then }) {
     let demo = new Demo2Object();
 
+
+    Given(/^I am on the Search Page$/, async () => {
+        await browser.driver.get(BASEURL);
+    });
+
+
+    // When(/^I perform a search$/, async () => {
+    //     page.searchTextBox.sendKeys('HUD');
+    //     await page.searchButton.click();
+    // });
+
+
+    When(/^I have entered a Start Date$/, async () => {
+        await demo.startDate.sendKeys('01/01/2018');
+    });
+
+    When(/^I have entered an End Date$/, async () => {
+        await demo.startDate.sendKeys('01/02/2018');
+    });
+
+    When(/^I have clicked submit$/, async () => {
+        await demo.button.click();
+    });
+
+
     // Given(/^(?:I am on the login page|An user accessed HudExchange Login page)$/, async () => {
     //     await browser.get(BASEURL+"/hudexchange-portal/?doaction=logout");
     // });
