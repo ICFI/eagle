@@ -346,8 +346,7 @@ module "rds" {
   publicly_accessible = false
   #iam_database_authentication_enabled = true
   vpc_security_group_ids = ["${aws_security_group.lb_sg.id}"]
-#["${data.aws_security_group.default.id}"]
-  backup_retention_period = 0
+  backup_retention_period = 1
 
   tags = {
     Name       = "${local.resource_label}"
@@ -356,7 +355,6 @@ module "rds" {
 
   # DB subnet group
   subnet_ids = ["${module.vpc.public_subnets}"]
-#["${data.aws_subnet_ids.all.ids}"]
 
   # DB parameter group
   family = "mysql5.7"
