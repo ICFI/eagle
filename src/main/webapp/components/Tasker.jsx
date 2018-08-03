@@ -1,51 +1,102 @@
-import DatePicker from 'react-bootstrap-date-picker';
+//Shows examples of Bootstrap form input functions
+
+import React, {Component} from 'react';
+import {
+  Form,
+  Button,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  HelpBlock,
+  Feedback,
+  Well
+} from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+import '../styles/tasker.css';
+import axios from 'axios';
+import config from '../config.js';
 
 class Tasker extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      startDate: moment(),
+      endDate: moment(),
+      result: ''
+    };
 
-	}
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.submitDates = this.submitDates.bind(this);
+  }
 
-	  handleChange (e) {
-	    this.setState({
-	      value: value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
-	      formattedValue: formattedValue // Formatted String, ex: "11/19/2016"
-	    });
-	  }
+  componentDidMount() {
+    //
+  }
 
-	  componentDidUpdate (){
-	    // Access ISO String and formatted values from the DOM.
-	    var hiddenInputElement = document.getElementById("example-datepicker");
-	    console.log(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z"
-	    console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016"
-	  }
+  componentDidUpdate(prevProps, prevState) {
+    //
+  }
 
-    performSearch ()
-    {
-    	const urlString = config.api.getUrl;
-    	axios.get(urlString)
-			.then(res => {
-				this.setState({ movies : res.data});
-			})
-			.catch(function (error) {
-				console.log(error);
-			}
-		);
-    }
-    
-    render() {
-        return (
-        	<div>
-		    <FormGroup>
-		      <ControlLabel>Label</ControlLabel>
-		      <DatePicker id="example-datepicker" value={this.state.value} onChange={this.handleChange} />
-		      <HelpBlock>Help</HelpBlock>
-		    </FormGroup>
-		    <Button bsStyle="primary">SUBMIT</Button>
-		    </div>
-	     );   
-    }
+  handleStartDateChange(date) {
+    this.setState({startDate: date});
+  }
+
+  handleEndDateChange(date) {
+    this.setState({endDate: date});
+  }
+
+  submitDates() {
+
+    const start = this.state.startDate.format('DD-MM-YYYY');
+    const end = this.state.endDate.format('DD-MM-YYYY');
+    const urlString = 'http://localhost:8080/api/task';
+
+    axios.post(urlString, {start, end}).then(res => {
+      console.log(res);
+      this.setState({
+        result: "Task in Days: " + res.data
+      });
+    }).catch(error => {
+      this.setState({result: error.response.data.message});
+    });
+
+  }
+
+  render() {
+
+    return (<div class="content-box-tasker">
+      <h1>Day Counter</h1>
+      <p>Welcome to Day Counter. Enter a start and end date to count the number of days in-between.
+      </p>
+      <form>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>START DATE:</label>
+              <DatePicker name="start" selected={this.state.startDate} dateFormat="DD/MM/YYYY" onChange={this.handleStartDateChange}/>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>END DATE:</label>
+              <DatePicker name="end" selected={this.state.endDate} dateFormat="DD/MM/YYYY" onChange={this.handleEndDateChange}/>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <Button bsStyle="primary" onClick={this.submitDates}>SUBMIT</Button>
+          </div>
+          <p/>
+          <div class="col-md-12">
+            <Well bsSize="large">{this.state.result}</Well>
+          </div>
+        </div>
+      </form>
+    </div>);
+  }
 }
 
 export default Tasker;
