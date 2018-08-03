@@ -53,7 +53,7 @@ class Tasker extends Component {
 
     const start = this.state.startDate.format('DD-MM-YYYY');
     const end = this.state.endDate.format('DD-MM-YYYY');
-    const urlString = 'http://localhost:8080/api/task';
+    const urlString = 'https://stage.eagle.e3si.icfcloud.com/api/task';
 
     axios.post(urlString, {start, end}).then(res => {
       console.log(res);
