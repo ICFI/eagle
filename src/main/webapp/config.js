@@ -5,8 +5,8 @@ export default {
 		callbackUrl: 'https://stage.eagle.e3si.icfcloud.com/callback'
 	},
 	api: {
-		getUrl: 'http://localhost:8080/api/movies',
-		postUrl: 'http://localhost:8080/api/movie',
-		deleteUrl: 'http://localhost:8080/api/movie'
+		getUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movies',
+		postUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movie',
+		deleteUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movie'
 	}
 };
