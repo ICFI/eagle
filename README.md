@@ -17,8 +17,4 @@ React frontend with Spring Boot backend application running within a Docker cont
 
 ### To run app inside Docker container locally.
 * Install docker on local machine
-* `./gradlew clean build docker`
-* `docker run -p 8080:8080 eagle-img`
-
-### To build and run app within AWS environment (stage/prod)
-* TODO - Add Terraform commands
+* `docker-compose up --build`
