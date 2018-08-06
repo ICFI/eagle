@@ -37,6 +37,10 @@ public class RESTController {
 	@PostMapping(value = "/api/task")
 	@ResponseStatus( HttpStatus.CREATED )
 	public Long postTask(@RequestBody Task task) throws Exception {
+		if(task.getStart() == null || task.getEnd() == null){
+			throw new Exception ("Dates cannot empty");
+		}
+		
 		if(task.getEnd().before(task.getStart())){
 			throw new Exception ("End time is before start time");
 		}
