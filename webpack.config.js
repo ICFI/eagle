@@ -7,39 +7,38 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [
-	  {
-	    test: /\.(js|jsx)$/,
-	    exclude: /node_modules/,
-	    use: ['babel-loader']
-	  },
-	  {
-	    test: /\.js$/,
-	    exclude: /node_modules/,
-	    use: ['babel-loader', 'eslint-loader']
-	  },
-      {
-        test: /\.css?$/,
+    rules: [{
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "css-loader"
-        }
+        use: ['babel-loader']
       },
       {
-        test: /\.svg?$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "svg-url-loader"
-        }
+        use: ['babel-loader', 'eslint-loader']
+      },
+      {
+        test: /\.css?$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8000, // Convert images < 8kb to base64 strings
+            name: 'images/[hash]-[name].[ext]'
+          }
+        }]
       }
     ]
   },
   plugins: [
     new UglifyJsPlugin({
-        sourceMap: true
+      sourceMap: true
     }),
     new webpack.DefinePlugin({
-       'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
 };

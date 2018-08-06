@@ -1,4 +1,4 @@
-// Shows examples REST interaction and use of Bootstrap Table methods
+// Examples of REST interaction and use of Bootstrap Table methods
 
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
@@ -36,7 +36,7 @@ class Movies extends Component {
 			}
 		);
     }
-    
+
     onDeleteRow(row)
     {
     	const urlString = config.api.deleteUrl;
@@ -75,7 +75,7 @@ class Movies extends Component {
     		onAddRow: this.onAddRow
   		};
     	const selectRow = {
-    		mode: 'checkbox', 
+    		mode: 'checkbox',
     		clickToSelect: true
   		};
         return (

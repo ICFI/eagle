@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import eagle.model.Movie;
+import eagle.model.Task;
 import eagle.repo.MovieRepository;
 
 /**
@@ -31,6 +32,20 @@ public class RESTController {
 
 		// Get first record in DB based on data load in resources/data.sql
 		return (ArrayList<Movie>) movieRepository.findAll();
+	}
+	
+	@PostMapping(value = "/api/task")
+	@ResponseStatus( HttpStatus.CREATED )
+	public Long postTask(@RequestBody Task task) throws Exception {
+		if(task.getStart() == null || task.getEnd() == null){
+			throw new Exception ("Dates cannot empty");
+		}
+		
+		if(task.getEnd().before(task.getStart())){
+			throw new Exception ("End time is before start time");
+		}
+		Long difference = (task.getStart().getTime() - task.getEnd().getTime())/86400000;
+		return Math.abs(difference);
 	}
 	
 	@PostMapping(value = "/api/movie")
