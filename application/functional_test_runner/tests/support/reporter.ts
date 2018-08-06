@@ -2,7 +2,7 @@ import * as reporter from "cucumber-html-reporter";
 import * as fs from "fs";
 import * as mkdirp from "mkdirp";
 import * as path from "path";
-const functionalTestReports = path.join("../../../testing_reports","/functional/");
+const functionalTestReports = path.join(process.cwd(), "../../../","testing_reports/functional");
 const targetJson = functionalTestReports + "/cucumber_report.json";
 
 const cucumberReporterOptions = {

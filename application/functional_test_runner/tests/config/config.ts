@@ -1,7 +1,7 @@
 import * as path from "path";
 import { browser, Config } from "protractor";
 import { Reporter } from "../support/reporter";
-const jsonReports = process.cwd() + "/reports/json";
+const functionalTestReports = path.join(process.cwd(), "../../../","testing_reports/functional");
 
 export const config: Config = {
 
@@ -25,12 +25,15 @@ export const config: Config = {
     onPrepare: () => {
         // browser.ignoreSynchronization = true;
         // browser.manage().window().maximize();
-        Reporter.createDirectory(jsonReports);
+        console.log("[CEP] - Running tests from " + process.cwd());
+        console.log("      - Attempting to create test results folder in " + functionalTestReports);
+
+        Reporter.createDirectory(functionalTestReports);
     },
 
     cucumberOpts: {
         compiler: "ts:ts-node/register",
-        format: "json:./reports/json/cucumber_report.json",
+        format: "json:"+ functionalTestReports + "/cucumber_report.json",
         require: ["../../typeScript/step_definitions/*.js", "../../typeScript/support/*.js"],
         strict: true,
         //tags: "@validation",
