@@ -2,15 +2,13 @@ import * as reporter from "cucumber-html-reporter";
 import * as fs from "fs";
 import * as mkdirp from "mkdirp";
 import * as path from "path";
-const jsonReports = path.join(process.cwd(), "/reports/json");
-const htmlReports = path.join(process.cwd(), "/reports/html");
-const targetJson = jsonReports + "/cucumber_report.json";
+const functionalTestReports = path.join("../../../testing_reports","/functional/");
+const targetJson = functionalTestReports + "/cucumber_report.json";
 
 const cucumberReporterOptions = {
     jsonFile: targetJson,
     theme: "hierarchy",
-    jsonFile: targetJson,
-    output: htmlReports + "/index.html",
+    output: functionalTestReports + "/index.html",
     reportSuiteAsScenarios: true,
     screenshotsDirectory: 'screenshots',
     storeScreenshots: true,
