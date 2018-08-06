@@ -14,7 +14,6 @@ import {
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../styles/tasker.css';
 import axios from 'axios';
 import config from '../config.js';
 
@@ -50,13 +49,17 @@ class Tasker extends Component {
   }
 
   submitDates() {
-
+    if (this.state.startDate == null || this.state.endDate == null)
+		{
+			this.setState({result: "Dates cannot empty."});
+			return;
+		}
+		
     const start = this.state.startDate.format('DD-MM-YYYY');
     const end = this.state.endDate.format('DD-MM-YYYY');
-    const urlString = 'https://stage.eagle.e3si.icfcloud.com/api/task';
+    const urlString = 'http://localhost:8080/api/task';
 
     axios.post(urlString, {start, end}).then(res => {
-      console.log(res);
       this.setState({
         result: "Task in Days: " + res.data
       });

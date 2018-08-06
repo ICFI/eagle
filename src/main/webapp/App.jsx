@@ -10,6 +10,7 @@ import Adder from './components/Adder.jsx';
 import Tasker from './components/Tasker.jsx';
 import Auth from './Auth.js';
 import history from './history';
+import './styles/app.css';
 
 const auth = new Auth();
 
