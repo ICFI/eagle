@@ -17,6 +17,11 @@
 * Configure the project settings
   * [Create an AWS CLI named profile](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html)
   * [Create an MFA enabled cli profile](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/)
+    * Convenience script:
+      ```sh
+      # use your own values
+      ./create_cred_snip.sh --mfa-serial='arn:aws:iam::123YOURNUMBER456:mfa/Your.Name' --profile=profile_name_from_previous_step --token-code=token_code_from_authenticator
+      ```
   * Copy, update and source the example environment variables file
   * `cp env.sh.example env.sh`
   * edit file
