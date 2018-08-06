@@ -88,8 +88,8 @@ asciidoctor {
 }
 
 task copyBundle(type: Copy) {
-    from file("build/js/bundle.js")
-    into file("src/main/resources/public")
+    from ("build/js")
+    into ("src/main/resources/public")
 }
 
 findbugs{

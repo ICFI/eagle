@@ -19,20 +19,17 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        use: ['style-loader', 'css-loader?url=false']
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(gif|png|jpe?g|svg|jpg)$/i,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true, 
-              disable: true,
-            },
-          },
-        ],
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8000, // Convert images < 8kb to base64 strings
+            name: 'images/[hash]-[name].[ext]'
+          }
+        }]
       }
     ]
   },
