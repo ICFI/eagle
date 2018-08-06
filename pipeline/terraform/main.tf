@@ -204,7 +204,7 @@ resource "aws_security_group" "lb_sg" {
     to_port     = 443
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+  
   egress {
     from_port = 0
     to_port   = 0
@@ -308,4 +308,71 @@ module "bastion" {
   region = "${var.region}"
   subnet_id = "${module.vpc.public_subnets[0]}"
   vpc_id = "${module.vpc.vpc_id}"
+}
+
+// ~~~ RDS-Mysql ~~~
+
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnet_ids" "all" {
+  vpc_id = "${data.aws_vpc.default.id}"
+}
+
+data "aws_security_group" "default" {
+  vpc_id = "${data.aws_vpc.default.id}"
+  name   = "default"
+}
+
+module "rds" {
+  source  = "terraform-aws-modules/rds/aws"
+  version = "1.19.0"
+
+  # insert the 10 required variables here
+  identifier = "${var.project}-${var.rds_identifier}"
+  engine            = "${var.rds_engine}"
+  engine_version    = "${var.rds_engine_version}"
+  instance_class    = "${var.rds_instance_class}"
+  allocated_storage = "${var.rds_allocated_storage}"
+  storage_encrypted = "${var.rds_storage_encrypted}"
+  maintenance_window = "${var.rds_maintenance_window}"
+  backup_window      = "${var.rds_backup_window}"
+  name = "${var.project}_${var.rds_db_name}"
+  username = "${var.rds_su_username}"
+  password = "${var.rds_su_password}"
+  port     = "${var.rds_port}"
+  multi_az = "${var.rds_multi_az}"
+  publicly_accessible = false
+  #iam_database_authentication_enabled = true
+  vpc_security_group_ids = ["${aws_security_group.lb_sg.id}"]
+  backup_retention_period = 1
+
+  tags = {
+    Name       = "${local.resource_label}"
+    Environment = "${terraform.env}"
+  }
+
+  # DB subnet group
+  subnet_ids = ["${module.vpc.public_subnets}"]
+
+  # DB parameter group
+  family = "mysql5.7"
+
+  # DB option group
+  major_engine_version = "5.7"
+
+  # Snapshot name upon DB deletion
+  final_snapshot_identifier = "${var.project}-${var.rds_identifier}"
+
+ parameters = [
+    {
+      name = "character_set_client"
+      value = "utf8"
+    },
+    {
+      name = "character_set_server"
+      value = "utf8"
+    }
+  ]
 }
