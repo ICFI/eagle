@@ -2,7 +2,7 @@ body {
     width: 100%;
     height:100%;
     background-color: #2a2a2a;
-    background-image: url('../images/calendar-bg.jpg');
+    background-image: url(./calendar-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
