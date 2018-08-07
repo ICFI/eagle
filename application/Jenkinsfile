@@ -33,7 +33,7 @@ pipeline {
 						git url: repo, branch: branch
 				}
 				// cleanup from prior runs
-				sh "ls -al"
+				sh "printenv"
 				sh "sudo rm -rf $analysisResultsDir"
 				sh "mkdir $analysisResultsDir"
 			}
