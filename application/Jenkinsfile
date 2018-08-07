@@ -26,15 +26,15 @@ pipeline {
 
 		stage('Preparation') {
 			steps {
-				script {
-				
-		repo = "$GIT_URL"
-		// branch ends up looking like `origin/branch-name`. split it.
-		branch = "FOO/BAR".tokenize("/")[0]
-				}
+//				script {
+//					repo = "$GIT_URL"
+//					// branch ends up looking like `origin/branch-name`. split it.
+//					branch = "FOO/BAR".tokenize("/")[0]
+//				}
 				dir(appCheckoutDir) {
 					sh 'pwd'
-						git url: repo, branch: branch
+						git url: "$GIT_URL",
+						branch: "$GIT_BRANCH".tokenize("/")[1]
 				}
 				// cleanup from prior runs
 				sh "printenv"
