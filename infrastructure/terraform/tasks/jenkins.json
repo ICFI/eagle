@@ -1,0 +1,44 @@
+[
+{
+    "cpu": ${cpu},
+    "essential": true,
+    "image": "${image}",
+    "memory": ${memory},
+    "name": "${container_name}",
+    "environment": [
+      {
+        "name": "JENKINS_OPTS",
+        "value": "--prefix=/jenkins"
+      },
+      {
+        "name": "JAVA_OPTS",
+        "value": "-Xmx6144m"
+      }
+    ],
+    "mountPoints": [
+      {
+        "sourceVolume": "efs-jenkins",
+        "containerPath": "/var/jenkins_home",
+        "readOnly": false
+      },
+      {
+        "sourceVolume": "docker-socket",
+        "containerPath": "/var/run/docker.sock",
+        "readOnly": false
+      },
+      {
+      "sourceVolume": "ecs-cluster-config",
+      "containerPath": "/etc/ecs/ecs.config",
+      "readOnly": true
+      }
+    ],
+    "portMappings": [
+      {
+        "containerPort": 8080
+      },
+      {
+        "containerPort": 50000
+      }
+    ]
+  }
+]

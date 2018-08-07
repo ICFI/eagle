@@ -1,4 +1,0 @@
-terraform.tfstate.d/
-.terraform/
-env.sh
-terraform*

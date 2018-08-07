@@ -1,7 +1,7 @@
 /build
 /bin
-/node_modules
-/src/main/resources/public/
+/application/node_modules
+/application/src/main/resources/public/
 .project
 .settings
 .gradle

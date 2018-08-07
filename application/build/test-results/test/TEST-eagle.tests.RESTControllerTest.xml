@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="eagle.tests.RESTControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-08-07T11:02:26" hostname="ICF2022462" time="0.435">
+  <properties/>
+  <testcase name="testDeleteMethod" classname="eagle.tests.RESTControllerTest" time="0.081"/>
+  <testcase name="testGetAllMethod" classname="eagle.tests.RESTControllerTest" time="0.097"/>
+  <testcase name="testPostMethod" classname="eagle.tests.RESTControllerTest" time="0.253"/>
+  <system-out><![CDATA[2018-08-07 07:02:24.863  INFO 57677 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [eagle.tests.RESTControllerTest], using SpringBootContextLoader
+2018-08-07 07:02:24.863  INFO 57677 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [eagle.tests.RESTControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2018-08-07 07:02:24.864  INFO 57677 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [eagle.tests.RESTControllerTest]: RESTControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2018-08-07 07:02:24.895  INFO 57677 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration eagle.Application for test class eagle.tests.RESTControllerTest
+2018-08-07 07:02:24.896  INFO 57677 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-08-07 07:02:24.896  INFO 57677 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@71684c86, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@706a374b, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@502df57b, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@b229330, org.springframework.test.context.support.DirtiesContextTestExecutionListener@381df2ae, org.springframework.test.context.transaction.TransactionalTestExecutionListener@19ec5a89, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2655e2e2, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@39715e0b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@6eae5309, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@156d7447, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1c26d6fa, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2f144273]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.0.3.RELEASE)
+
+2018-08-07 07:02:24.956  INFO 57677 --- [    Test worker] eagle.tests.RESTControllerTest           : Starting RESTControllerTest on ICF2022462 with PID 57677 (started by jwilcoxen in /Users/jwilcoxen/eagle/application)
+2018-08-07 07:02:24.957  INFO 57677 --- [    Test worker] eagle.tests.RESTControllerTest           : No active profile set, falling back to default profiles: default
+2018-08-07 07:02:24.960  INFO 57677 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@76d2fd9: startup date [Tue Aug 07 11:02:24 UTC 2018]; root of context hierarchy
+2018-08-07 07:02:25.790  INFO 57677 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-07 07:02:25.864  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@76d2fd9: startup date [Tue Aug 07 11:02:24 UTC 2018]; root of context hierarchy
+2018-08-07 07:02:25.877  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/movie/{id}],methods=[DELETE]}" onto public void eagle.controller.RESTController.delete(java.lang.Long)
+2018-08-07 07:02:25.878  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/movies],methods=[GET]}" onto public java.util.List<eagle.model.Movie> eagle.controller.RESTController.getAll()
+2018-08-07 07:02:25.878  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/movie],methods=[POST]}" onto public eagle.model.Movie eagle.controller.RESTController.post(eagle.model.Movie)
+2018-08-07 07:02:25.878  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/task],methods=[POST]}" onto public java.lang.Long eagle.controller.RESTController.postTask(eagle.model.Task) throws java.lang.Exception
+2018-08-07 07:02:25.880  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-08-07 07:02:25.881  INFO 57677 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-07 07:02:25.897  INFO 57677 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-07 07:02:25.897  INFO 57677 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-07 07:02:25.945  INFO 57677 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2018-08-07 07:02:26.073  INFO 57677 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring FrameworkServlet ''
+2018-08-07 07:02:26.073  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2018-08-07 07:02:26.088  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 15 ms
+2018-08-07 07:02:26.105  INFO 57677 --- [    Test worker] eagle.tests.RESTControllerTest           : Started RESTControllerTest in 1.179 seconds (JVM running for 10.145)
+2018-08-07 07:02:26.111  INFO 57677 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring FrameworkServlet ''
+2018-08-07 07:02:26.111  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2018-08-07 07:02:26.112  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 1 ms
+2018-08-07 07:02:26.193  INFO 57677 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring FrameworkServlet ''
+2018-08-07 07:02:26.193  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2018-08-07 07:02:26.195  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 2 ms
+2018-08-07 07:02:26.292  INFO 57677 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring FrameworkServlet ''
+2018-08-07 07:02:26.293  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2018-08-07 07:02:26.295  INFO 57677 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 2 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

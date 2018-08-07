@@ -1,0 +1,14 @@
+[
+  {
+    "cpu": ${cpu},
+    "essential": true,
+    "image": "${image}",
+    "memory": ${memory},
+    "name": "${container_name}",
+    "portMappings": [
+      {
+        "containerPort": 8080
+      }
+    ]
+  }
+]
