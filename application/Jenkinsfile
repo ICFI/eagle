@@ -31,7 +31,6 @@ pipeline {
 					git url: "$GIT_URL", branch: "$GIT_BRANCH".tokenize("/")[1]
 				}
 				// cleanup from prior runs
-				sh "printenv"
 				sh "sudo rm -rf $analysisResultsDir"
 				sh "mkdir $analysisResultsDir"
 			}
