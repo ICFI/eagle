@@ -4,7 +4,7 @@ pipeline {
 
 	environment {
 		repo = "$GIT_URL"
-		branch = "$GIT_BRANCH"
+		branch = "$GIT_BRANCH".tokenize("/")[1]
 
 		// Container
 		imageName = 'eagle'
