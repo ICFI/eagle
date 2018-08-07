@@ -3,8 +3,8 @@ pipeline {
 	agent any
 
 	environment {
-		repo = 'https://github.com/ICFI/eagle.git'
-		branch = 'master'
+		repo = "$GIT_URL"
+		branch = "$GIT_BRANCH"
 
 		// Container
 		imageName = 'eagle'
