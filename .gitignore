@@ -1,5 +1,5 @@
-/build
-/bin
+/application/build
+/application/bin
 /application/node_modules
 /application/src/main/resources/public/
 .project
