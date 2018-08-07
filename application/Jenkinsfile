@@ -3,8 +3,10 @@ pipeline {
 	agent any
 
 	environment {
-		repo = 'https://github.com/ICFI/eagle.git'
-		branch = 'master'
+
+		// SCM
+		GIT_URL = "${GIT_URL ?: "https://github.com/ICFI/eagle.git"}"
+		GIT_BRANCH = "${GIT_BRANCH ?: "origin/master"}"
 
 		// Container
 		imageName = 'eagle'
@@ -29,11 +31,10 @@ pipeline {
 		stage('Preparation') {
 			steps {
 				dir(appCheckoutDir) {
-					sh 'pwd'
-						git url: repo, branch: branch
+					// $GIT_BRANCH looks like `origin/branch-name` so parse it.
+					git url: "$GIT_URL", branch: "$GIT_BRANCH".tokenize("/")[1]
 				}
 				// cleanup from prior runs
-				sh "ls -al"
 				sh "sudo rm -rf $analysisResultsDir"
 				sh "mkdir $analysisResultsDir"
 			}
