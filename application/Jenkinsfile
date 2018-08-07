@@ -1,11 +1,14 @@
 pipeline {
 
 	agent any
+	
+	script {
+		branch = "FOO/BAR".tokenize("/")[0]
+	}
 
 	environment {
 		repo = "$GIT_URL"
 		// branch ends up looking like `origin/branch-name`. split it.
-		branch = "FOO/BAR".tokenize("/")[0]
 
 		// Container
 		imageName = 'eagle'
