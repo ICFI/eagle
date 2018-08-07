@@ -27,8 +27,8 @@ pipeline {
 		stage('Preparation') {
 			steps {
 				dir(appCheckoutDir) {
-					git url: "$GIT_URL",
-						branch: "$GIT_BRANCH".tokenize("/")[1]
+					// $GIT_BRANCH looks like `origin/branch-name` so parse it.
+					git url: "$GIT_URL", branch: "$GIT_BRANCH".tokenize("/")[1]
 				}
 				// cleanup from prior runs
 				sh "printenv"
