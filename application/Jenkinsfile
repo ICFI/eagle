@@ -63,7 +63,9 @@ pipeline {
 				// run the image so we can get analysis results from it
 				sh 'sudo docker run --rm --name analysis_results -d analysis_results:latest tail -f /dev/null'
 				// copy the analysis results locally
-				sh "sudo docker cp analysis_results:/app/build $WORKSPACE/analysis_results"
+				sh "sudo docker cp analysis_results:/app/build $analysisResultsDir"
+				// the results have root ownership (from the container)
+				sh "sudo chown -R jenkins:jenkins $analysisResultsDir"
 				// kill the container
 				sh "sudo docker stop analysis_results &"
 
