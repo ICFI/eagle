@@ -1,0 +1,7 @@
+.gradle
+Jenkinsfile
+bin
+build
+container
+docker-compose.yml
+node_modules

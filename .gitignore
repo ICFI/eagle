@@ -1,9 +1,5 @@
-/application/build
-/application/bin
-/application/node_modules
-/application/src/main/resources/public/
+.classpath
+.git
+.gradle
 .project
 .settings
-.gradle
-.git
-.classpath
