@@ -3,3 +3,5 @@
 .gradle
 .project
 .settings
+.idea
+eagle.iml
