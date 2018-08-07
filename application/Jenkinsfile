@@ -6,7 +6,7 @@ pipeline {
 		repo = "$GIT_URL"
 		// branch ends up looking like `origin/branch-name`. split it.
 		script {
-			branch = "FOO/BAR".tokenize(" ")[1]
+			branch = "FOO BAR"
 		}
 
 		// Container
