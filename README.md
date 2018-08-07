@@ -32,7 +32,7 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | ...| ... |
 
 ## Application
-For more information to go to the Application [README](application/README.md)
+For more information go to the Application [README](application/README.md)
 
 ...
 ## Design
@@ -42,7 +42,7 @@ For more information to go to the Application [README](application/README.md)
 
 ...
 ## Infrastructure
-For more information to go to the Infrastructure [README](infrastructure/README.md)
+For more information go to the Infrastructure [README](infrastructure/README.md)
 
 ...
 ## Testing Quality Reports
