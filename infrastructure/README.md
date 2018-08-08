@@ -44,13 +44,13 @@
         Port 443
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
     
-    Host eagle-<YOUR_WORKSPACE_NAME>-ecs
-        HostName <EC2_PRIVATE_IP>
+    Host eagle-<YOUR_WORKSPACE_NAME>-ecs1
+        HostName <FIRST_EC2_PRIVATE_IP>
         ProxyJump eagle-<YOUR_WORKSPACE_NAME>-bastion
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
     
-    Host eagle-<YOUR_WORKSPACE_NAME>-ecs
-        HostName <EC2_PRIVATE_IP>
+    Host eagle-<YOUR_WORKSPACE_NAME>-ecs2
+        HostName <SECOND_EC2_PRIVATE_IP>
         ProxyJump eagle-<YOUR_WORKSPACE_NAME>-bastion
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
     
