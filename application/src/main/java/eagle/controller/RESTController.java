@@ -38,7 +38,7 @@ public class RESTController {
 	@ResponseStatus( HttpStatus.CREATED )
 	public Long postTask(@RequestBody Task task) throws Exception {
 		if(task.getStart() == null || task.getEnd() == null){
-			throw new Exception ("Dates cannot empty");
+			throw new Exception ("Dates cannot be empty");
 		}
 		
 		if(task.getEnd().before(task.getStart())){
