@@ -6,12 +6,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -37,6 +40,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eagle.controller.RESTController;
 import eagle.model.Movie;
+import eagle.model.Task;
 import eagle.repo.MovieRepository;
 
 /**
@@ -62,6 +66,9 @@ public class RESTControllerTest {
 
 	@Rule
 	public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation();
+	
+	@Rule
+	public ExpectedException exceptionRule = ExpectedException.none();
 
 	@Before
 	public void setUp() {
@@ -97,19 +104,61 @@ public class RESTControllerTest {
 		MvcResult result = this.mvc.perform(requestBuilder).andReturn();
 
 		MockHttpServletResponse response = result.getResponse();
-		
+
 		assertEquals(HttpStatus.CREATED.value(), response.getStatus());
 	}
-	
+
 	@Test
 	public void testDeleteMethod() throws Exception {
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/movie/99").accept(MediaType.APPLICATION_JSON);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/movie/99")
+				.accept(MediaType.APPLICATION_JSON);
 
 		MvcResult result = this.mvc.perform(requestBuilder).andReturn();
 
 		MockHttpServletResponse response = result.getResponse();
-		
+
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
+
+	@Test
+	public void testPostTaskMethod() throws Exception {
+
+		// Happy path
+		eagle.model.Task testTask = new Task();
+		testTask.setStart(new Date());
+		testTask.setEnd(new Date());
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/task").accept(MediaType.APPLICATION_JSON)
+				.content(convertObjectToJsonBytes(testTask)).contentType(MediaType.APPLICATION_JSON);
+
+		MvcResult result = this.mvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+
+		// Empty vals path
+		testTask = new Task();
+		testTask.setStart(null);
+		testTask.setEnd(null);
+
+		requestBuilder = MockMvcRequestBuilders.post("/api/task").accept(MediaType.APPLICATION_JSON)
+				.content(convertObjectToJsonBytes(testTask)).contentType(MediaType.APPLICATION_JSON);
+
+		exceptionRule.expectMessage("Dates cannot be empty");
+		result = this.mvc.perform(requestBuilder).andReturn();
+
+		
+		// Incorrect vals path
+		testTask = new Task();
+		testTask.setStart(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		testTask.setEnd(Date.from(LocalDate.now().minusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		requestBuilder = MockMvcRequestBuilders.post("/api/task").accept(MediaType.APPLICATION_JSON)
+				.content(convertObjectToJsonBytes(testTask)).contentType(MediaType.APPLICATION_JSON);
+
+		exceptionRule.expectMessage("End time is before start time");
+		result = this.mvc.perform(requestBuilder).andReturn();
 	}
 
 	private static byte[] convertObjectToJsonBytes(Object object) throws IOException {

@@ -13,4 +13,9 @@ public class ApplicationTest {
     @Test
     public void contextLoads() throws Exception {
     }
+    
+    @Test
+    public void main() {
+       Application.main(new String[] {});
+    }
 }
