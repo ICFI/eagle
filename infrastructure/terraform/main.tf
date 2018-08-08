@@ -72,7 +72,7 @@ data "template_file" "jenkins_task_definition" {
   template = "${file("${path.module}/tasks/jenkins.json")}"
 
   vars {
-    image            = "spohnan/jenkins-docker:latest"
+    image            = "icfdev/jenkins-aws-docker-nodejs:latest"
     container_name   = "jenkins"
     cpu              = "2048"
     memory           = "6144"

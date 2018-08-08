@@ -34,18 +34,24 @@
 * Update EFS throughput mode to something like 10MiB/s provisioned through the UI
 * Copy the public IP of the bastion host and configure an ssh connection
 * Copy the private IP of the ECS host and configure an ssh connection
+  * Bastion IP: `terraform output -module=bastion public_ip`
   * Example ssh config
     ```
     # ~/.ssh/config
     
-    Host eagle-bastion
+    Host eagle-<YOUR_WORKSPACE_NAME>-bastion
         HostName <EC2_PUBLIC_IP>
         Port 443
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
     
-    Host eagle-ecs
+    Host eagle-<YOUR_WORKSPACE_NAME>-ecs
         HostName <EC2_PRIVATE_IP>
-        ProxyJump eagle-bastion
+        ProxyJump eagle-<YOUR_WORKSPACE_NAME>-bastion
+        IdentityFile ~/.ssh/<YOUR_KEY>.pem
+    
+    Host eagle-<YOUR_WORKSPACE_NAME>-ecs
+        HostName <EC2_PRIVATE_IP>
+        ProxyJump eagle-<YOUR_WORKSPACE_NAME>-bastion
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
     
     Host eagle-*
@@ -62,7 +68,7 @@
   ```
 * (Optional) Monitor the status of the Jenkins container by periodically running `docker ps`
   * Once it starts switch to `docker logs -f CONTAINER_ID` to see when it's finished bootstrapping
-  * If you wait ~5 minutes it will bootstrap entirely on its own, the commands above are just if you want to follow along 
+  * If you wait ~5 minutes it will bootstrap entirely on its own, the commands above are just if you want to follow along
 * Create a new A/Alias record that points at either the apex (blank) for prod or a specific environment name like stage to the load balancer
 * Navigate to the `/jenkins` context on the load balancer using the DNS name we configured in the last step
 * Create the Jenkins admin user with an initial password found with
@@ -73,7 +79,8 @@
 * Create a pipeline job for the eagle application
   * Pipeline Definition: `Pipeline script from SCM`
   * SCM: `Git`
-  * Repository URL: `https://github.com/ICFI/eagle`
+    * Repository URL: `https://github.com/ICFI/eagle.git`
+    * Script Path: `application/Jenkinsfile`
   * "Save" button
   * "Build Now" left-hand menu link
   
