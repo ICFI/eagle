@@ -76,6 +76,8 @@ pipeline {
 					//   will have test results with older dates).
 					sh "sudo touch build/test-results/test/*.xml"
 					junit "build/test-results/test/*.xml"
+					// findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/findbugs.xml', unHealthy: ''
+					findbugs pattern: 'build/reports/findbugs/*.xml'
 				}
 			}
 		}

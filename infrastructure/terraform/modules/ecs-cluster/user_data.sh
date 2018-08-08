@@ -92,7 +92,7 @@ if [ $? -ne 0 ]; then
     fi
 
     # Pre-install plugins
-    docker run -v /mnt/efs/jenkins:/var/jenkins_home jenkins/jenkins:lts-alpine bash -c "export REF=/var/jenkins_home/plugins/ ; /usr/local/bin/install-plugins.sh amazon-ecr amazon-ecs ant build-timeout credentials-binding email-ext git github-branch-source gradle greenballs mailer ldap matrix-auth pam-auth pipeline-aws pipeline-github-lib pipeline-stage-view ssh-slaves subversion timestamper workflow-aggregator ws-cleanup"
+    docker run -v /mnt/efs/jenkins:/var/jenkins_home jenkins/jenkins:lts-alpine bash -c "export REF=/var/jenkins_home/plugins/ ; /usr/local/bin/install-plugins.sh amazon-ecr amazon-ecs ant build-timeout credentials-binding email-ext findbugs git github-branch-source gradle greenballs jacoco ldap mailer matrix-auth pam-auth pipeline-aws pipeline-github-lib pipeline-stage-view ssh-slaves subversion timestamper workflow-aggregator ws-cleanup"
 else
     echo "Directory $${EFS_MOUNT_DIR} is already a valid mountpoint!"
 fi
