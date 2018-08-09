@@ -1,0 +1,18 @@
+version: "3.6"
+ services:
+  e2e:
+    build:
+      context: ../
+    image: "e2e"
+    container_name: e2e
+#    environment:
+#      - SITE_HOST_NAME=${SITE_HOST_NAME}
+#      - NODE_PATH=/usr/lib/node_modules
+#      - DEBIAN_FRONTEND=noninteractive
+#      - HOME=/protractor/project
+    volumes:
+      - reports:/protractor/project/reports
+ #networks:
+ volumes:
+  reports:
+#    external: true

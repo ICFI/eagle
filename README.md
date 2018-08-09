@@ -27,7 +27,7 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | OWASP Dependency Check | Security scan analysis |
 | OWASP Zap| Security scan analysis |
 | Clair | Security scan analysis |
-| Jenkins | Automatted build tool |
+| Jenkins | Automated build tool |
 | Docker | Container / microservice framework |
 | ...| ... |
 
