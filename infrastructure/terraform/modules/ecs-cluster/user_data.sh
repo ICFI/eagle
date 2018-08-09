@@ -96,6 +96,8 @@ if [ $? -ne 0 ]; then
 else
     echo "Directory $${EFS_MOUNT_DIR} is already a valid mountpoint!"
 fi
+#install mysql client to connect to RDS 
+yum -y install mysql
 
 # Additional user data
 ${additional_user_data_script}
