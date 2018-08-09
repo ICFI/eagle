@@ -182,9 +182,9 @@ resource "aws_alb" "main" {
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = "${aws_alb.main.id}"
   port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "${var.certificate_arn}"
+  #protocol          = "HTTPS"
+  #ssl_policy        = "ELBSecurityPolicy-2016-08"
+  #certificate_arn   = "${var.certificate_arn}"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.eagle.id}"
@@ -202,13 +202,6 @@ resource "aws_security_group" "lb_sg" {
     protocol    = "tcp"
     from_port   = 443
     to_port     = 443
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  ingress {
-    protocol    = "tcp"
-    from_port   = 3306
-    to_port     = 3306
     cidr_blocks = ["0.0.0.0/0"]
   }
   
@@ -361,8 +354,7 @@ module "rds" {
   }
 
   # DB subnet group
-  #subnet_ids = ["${local.network_prefix}.1.0/24", "${local.network_prefix}.2.0/24"]
-   subnet_ids = ["${module.vpc.private_subnets}"]
+  subnet_ids = ["${module.vpc.public_subnets}"]
 
   # DB parameter group
   family = "mysql5.7"
@@ -384,4 +376,3 @@ module "rds" {
     }
   ]
 }
-

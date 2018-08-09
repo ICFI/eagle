@@ -13,6 +13,7 @@ resource "aws_instance" "bastion" {
 #!/usr/bin/env bash
 sed -i 's/#Port 22/Port 22\nPort 443\n/g' /etc/ssh/sshd_config
 service sshd restart
+yum -y install mysql
 EOF
 }
 
@@ -47,6 +48,13 @@ resource "aws_security_group" "bastion-sg" {
     protocol    = "tcp"
     from_port   = 443
     to_port     = 443
+    cidr_blocks = ["${var.bastion_allowed_ips}"]
+  }
+
+  ingress {
+    protocol    = "tcp"
+    from_port   = 3306
+    to_port     = 3306
     cidr_blocks = ["${var.bastion_allowed_ips}"]
   }
 
