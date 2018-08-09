@@ -8,6 +8,7 @@ import Callback from './components/Callback.jsx';
 import Movies from './components/Movies.jsx';
 import Adder from './components/Adder.jsx';
 import Tasker from './components/Tasker.jsx';
+import Form from './components/Form.jsx';
 import Auth from './Auth.js';
 import history from './history';
 import './styles/app.css';
@@ -34,6 +35,7 @@ class App extends Component {
           /*<Route exact="exact" path="/adder" render={props => auth.isAuthenticated()
               ? (<Adder exact="exact" {...props}/>)
               : (<Redirect to="/home"/>)}/>*/
+          <Route exact path="/form" render={(props) => <Form auth={auth} {...props} />} />
           <Route exact="exact" path="/tasker" render={props => auth.isAuthenticated()
               ? (<Tasker exact="exact" {...props}/>)
               : (<Redirect to="/home"/>)}/>
