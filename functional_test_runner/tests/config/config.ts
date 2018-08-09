@@ -5,9 +5,26 @@ const functionalTestReports = path.join(process.cwd(), "../../","testing_quality
 export const config: Config = {
     seleniumAddress: "http://127.0.0.1:4444/wd/hub",
     SELENIUM_PROMISE_MANAGER: false,
+
     baseUrl: "https://stage.eagle.e3si.icfcloud.com/",
+    params:{
+        //featureUserName
+        //featureUserPassword
+        AttachAfterScenarioScreenShotInReport:true
+    },
     capabilities: {
-        browserName: "chrome",
+        acceptInsecureCerts: true,
+        acceptSslCerts: true,
+        browserName: 'chrome',
+        'chromeOptions': {
+             'args': [
+            "--headless",
+            "no-sandbox",
+            "--disable-gpu",
+            "--window-size=800,600",
+            'user-agent=ICF-TEST-RUNNER',
+            ]
+        }
     },
     framework: "custom",
     frameworkPath: require.resolve("protractor-cucumber-framework"),
@@ -15,8 +32,9 @@ export const config: Config = {
         "../../features/**/*.feature",
     ],
     onPrepare: () => {
-        // browser.ignoreSynchronization = true;
-        // browser.manage().window().maximize();
+        browser.ignoreSynchronization = true;
+        browser.manage().window().maximize();
+        browser.manage().timeouts().implicitlyWait(5000);
         console.log("[CEP] - Running tests from " + process.cwd());
         console.log("      - Attempting to create test results folder in " + functionalTestReports);
         Reporter.createDirectory(functionalTestReports);

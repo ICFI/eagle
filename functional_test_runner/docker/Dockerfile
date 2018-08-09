@@ -38,16 +38,16 @@ RUN useradd headless --shell /bin/bash --create-home \
 
 USER root
 
-COPY config /src
-COPY ../../tests /tests
+COPY docker/config /src
+COPY ./tests /tests
 
 VOLUME /tests
 
-WORKDIR /src
+WORKDIR /tests
 
 RUN npm install -g dateformat request && \
 	npm install && \
-    node_modules/webdriver-manager/bin/webdriver-manager update && \
+	npm run webdriver-update && \
     set -xe \
     && curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
@@ -58,6 +58,7 @@ RUN npm install -g dateformat request && \
     && rm -rf /var/lib/apt/lists/* \
     && bash -c '([[ ! -d $JAVA_SECURITY_DIR ]] && ln -s $JAVA_HOME/lib $JAVA_HOME/conf) || (echo "Found java conf dir, package has been fixed, remove this hack"; exit -1)'
 
-ENV NODE_PATH /src/node_modules
+ENV NODE_PATH /tests/node_modules
 
-ENTRYPOINT ["/src/protractor.sh"]
+RUN chmod -f 755 /src/test_runner.sh
+ENTRYPOINT ["/src/test_runner.sh"]
