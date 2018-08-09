@@ -205,6 +205,13 @@ resource "aws_security_group" "lb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   
+  ingress {
+    protocol    = "tcp"
+    from_port   = 3306
+    to_port     = 3306
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
   egress {
     from_port = 0
     to_port   = 0
@@ -354,7 +361,7 @@ module "rds" {
   }
 
   # DB subnet group
-  subnet_ids = ["${module.vpc.public_subnets}"]
+  subnet_ids = ["${module.vpc.private_subnets}"]
 
   # DB parameter group
   family = "mysql5.7"
@@ -376,3 +383,4 @@ module "rds" {
     }
   ]
 }
+
