@@ -361,8 +361,7 @@ module "rds" {
   }
 
   # DB subnet group
-  #subnet_ids = ["${local.network_prefix}.1.0/24", "${local.network_prefix}.2.0/24"]
-   subnet_ids = ["${module.vpc.private_subnets}"]
+  subnet_ids = ["${module.vpc.private_subnets}"]
 
   # DB parameter group
   family = "mysql5.7"

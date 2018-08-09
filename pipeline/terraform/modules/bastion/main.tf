@@ -13,7 +13,6 @@ resource "aws_instance" "bastion" {
 #!/usr/bin/env bash
 sed -i 's/#Port 22/Port 22\nPort 443\n/g' /etc/ssh/sshd_config
 service sshd restart
-yum -y install mysql
 EOF
 }
 
