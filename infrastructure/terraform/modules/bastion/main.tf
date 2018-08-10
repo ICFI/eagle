@@ -50,13 +50,6 @@ resource "aws_security_group" "bastion-sg" {
     cidr_blocks = ["${var.bastion_allowed_ips}"]
   }
 
-  ingress {
-    protocol    = "tcp"
-    from_port   = 3306
-    to_port     = 3306
-    cidr_blocks = ["${var.bastion_allowed_ips}"]
-  }
-
   egress {
     protocol    = -1
     from_port   = 0
