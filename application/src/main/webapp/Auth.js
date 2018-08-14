@@ -7,9 +7,9 @@ export default class Auth {
 		domain: config.Auth0.domain,
 		clientID: config.Auth0.clientId,
 		redirectUri: config.Auth0.callbackUrl,
-		audience: `https://${config.Auth0.domain}/userinfo`,
 		responseType: 'token id_token',
-		scope: 'openid'
+		scope: 'openid',
+		audience: 'https://eagle-api.com'
 	});
 
 	constructor() {
@@ -56,7 +56,7 @@ export default class Auth {
 	}
 
 	isAuthenticated() {
-		// Check whether the current time is past the 
+		// Check whether the current time is past the
 		// access token's expiry time
 		let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
 		return new Date().getTime() < expiresAt;

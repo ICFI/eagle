@@ -1,12 +1,13 @@
 export default {
 	Auth0: {
 		domain: 'icf-eagle.auth0.com',
-		clientId: 'hXvArA3TBGZBip8rofS3r0y-r6FIeTQ2',
+		clientId: '0SHj8DmMneDlxxEhsbFDws9asKH0vs5v',
 		callbackUrl: 'https://stage.eagle.e3si.icfcloud.com/callback'
 	},
 	api: {
 		getUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movies',
-		postUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movie',
+		postMovieUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movie',
+		postTaskUrl: 'https://stage.eagle.e3si.icfcloud.com/api/task',
 		deleteUrl: 'https://stage.eagle.e3si.icfcloud.com/api/movie'
 	}
 };

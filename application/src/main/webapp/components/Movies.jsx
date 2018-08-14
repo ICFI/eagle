@@ -54,7 +54,7 @@ class Movies extends Component {
     }
 
     onAddRow(row) {
-    	const urlString = config.api.postUrl;
+    	const urlString = config.api.postMovieUrl;
     	const title = row.title;
     	const rating = row.rating;
 

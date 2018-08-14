@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
  
+	/**
+	 * Serves all requests to the homepage and subpaths for a single page web interface
+	 *
+	 */
     @RequestMapping(value = "/{path:[^\\.]*}")
     public String index() {
         return "index";

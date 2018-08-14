@@ -49,17 +49,27 @@ class Tasker extends Component {
   }
 
   submitDates() {
-    if (this.state.startDate == null || this.state.endDate == null)
-		{
-			this.setState({result: "Dates cannot empty."});
-			return;
-		}
+    if (this.state.startDate == null || this.state.endDate == null) {
+      this.setState({result: "Dates cannot be empty."});
+      return;
+    }
 
     const start = this.state.startDate.format('DD-MM-YYYY');
     const end = this.state.endDate.format('DD-MM-YYYY');
-    const urlString = 'https://stage.eagle.e3si.icfcloud.com/api/task';
+    const urlString = config.api.postTaskUrl;
+    // API enppoint is secured with Auth0
+    const apiHeaders = {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": "Bearer " + localStorage.getItem('access_token')
+      }
+    };
 
-    axios.post(urlString, {start, end}).then(res => {
+    axios.post(urlString, {
+      start,
+      end
+    }, apiHeaders).then(res => {
       this.setState({
         result: "Task in Days: " + res.data
       });
