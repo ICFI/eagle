@@ -1,4 +1,4 @@
-# Eagle project
+# Eagle Project
 
 The Eagle project is a single page application (SPA) built with ReactJS and Java running within an AWS cloud environment.  The application utilizes server-side rendering (SSR) technologies to first render the HTML on the server before serving to the client.  A "SPA + SSR" application is often called an ***isomorphic application***.  
 
@@ -29,20 +29,13 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | Clair | Security scan analysis |
 | Jenkins | Automated build tool |
 | Docker | Container / microservice framework |
-| ...| ... |
 
 ## Application
-For more information go to the Application [README](application/README.md)
+To run the application go to the Application [README](application/README.md)
 
-...
-## Design
 
-...
-## Development Process
-
-...
 ## Infrastructure
-For more information go to the Infrastructure [README](infrastructure/README.md)
+To use scripts go to the Infrastructure [README](infrastructure/README.md)
 
-...
-## Testing Quality Reports
+## Functional Test
+To use tests go to the Functional Test [README](functional_test/README.md)
