@@ -1,6 +1,7 @@
 
-### Setup
+# How to use Infrastructure Scripts
 
+## Run scripts
 * Configure DNS using a Route53 hosted domain
   * Create a new hosted domain in the challenge account that's a subdomain of a domain we already own
   * Create a delegation record in the parent domain/zone
@@ -29,7 +30,7 @@
 * Build stage environment infrastructure
   * `terraform apply`
 
-### Configure
+## Configure
 
 * Update EFS throughput mode to something like 10MiB/s provisioned through the UI
 * Copy the public IP of the bastion host and configure an ssh connection
@@ -38,22 +39,22 @@
   * Example ssh config
     ```
     # ~/.ssh/config
-    
+
     Host eagle-<YOUR_WORKSPACE_NAME>-bastion
         HostName <EC2_PUBLIC_IP>
         Port 443
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
-    
+
     Host eagle-<YOUR_WORKSPACE_NAME>-ecs1
         HostName <FIRST_EC2_PRIVATE_IP>
         ProxyJump eagle-<YOUR_WORKSPACE_NAME>-bastion
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
-    
+
     Host eagle-<YOUR_WORKSPACE_NAME>-ecs2
         HostName <SECOND_EC2_PRIVATE_IP>
         ProxyJump eagle-<YOUR_WORKSPACE_NAME>-bastion
         IdentityFile ~/.ssh/<YOUR_KEY>.pem
-    
+
     Host eagle-*
         User ec2-user
         ServerAliveInterval 60
@@ -83,8 +84,8 @@
     * Script Path: `application/Jenkinsfile`
   * "Save" button
   * "Build Now" left-hand menu link
-  
-### Result
+
+## Result
 
 At the end of the deployment the following resources will have been provisioned.
 
@@ -95,7 +96,7 @@ At the end of the deployment the following resources will have been provisioned.
 * An eagle container built from the source at the root of this project
 * An application load balancer
 
-### Links
+## Links
 * EC2 -> Load Balancers link in the left-hand menu -> Select the ALB and copy the DNS name
 * **`/jenkins/`** - to access jenkins
 * **`/`** - access application once first build has successfully completed
