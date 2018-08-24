@@ -20,10 +20,10 @@ import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
     @Value(value = "${auth0.apiAudience}")
     private String apiAudience;
-    
+
     @Value(value = "${auth0.issuer}")
     private String issuer;
 
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors();
@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .configure(http)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/task").authenticated();
-                //.antMatchers(HttpMethod.GET, "/api/movies").hasAuthority("read:movie");
+                //.antMatchers(HttpMethod.POST, "/api/task").authenticated();
+                .antMatchers(HttpMethod.GET, "/api/movies").hasAuthority("read:movie");
     }
 }

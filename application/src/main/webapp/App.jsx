@@ -36,10 +36,7 @@ class App extends Component {
               ? (<Adder exact="exact" {...props}/>)
               : (<Redirect to="/home"/>)}/>*/
           <Route exact path="/form" render={(props) => <Form auth={auth} {...props} />} />
-          <Route exact="exact" path="/tasker" render={props => auth.isAuthenticated()
-              ? (<Tasker exact="exact" {...props}/>)
-              : (<Redirect to="/home"/>)}/>
-
+          <Route exact path="/tasker" render={(props) => <Tasker auth={auth} {...props} />} />
           <Redirect to="/home"/>
         </Switch>
         <Route path="/callback" render={(props) => {
