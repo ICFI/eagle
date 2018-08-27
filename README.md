@@ -6,7 +6,7 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 
 | Technical Highlights  |
 | ------------- |
-| Spring Boot application framework |
+| Spring Boot application container framework |
 | ReactJS SPA/SSR UI framework |
 | Gradle bootstrap build tooling and plugins|
 | Terraform modules and scripting |
