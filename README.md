@@ -9,7 +9,7 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | Spring Boot application container framework |
 | ReactJS SPA/SSR UI framework |
 | Gradle bootstrap build tooling and plugins|
-| Terraform modules and scripting |
+| Terraform cloud agnostic modules and scripting |
 | Functional testing (Cucumber) framework |
 | CD/CI pipeline using Jenkins/Docker/Gradle|
 | AWS ECR (microservice cloud containers) configuration|
