@@ -1,6 +1,6 @@
 # Eagle Project
 
-The Eagle project is a single page application (SPA) built with ReactJS and Java running within an AWS cloud environment.  The application utilizes server-side rendering (SSR) technologies to first render the HTML on the server before serving to the client.  A "SPA + SSR" application is often called an ***isomorphic application***.  
+The Eagle project is a single page application (SPA) built with ReactJS and Java running within an AWS cloud environment.  The application utilizes server-side rendering (SSR) technologies to first render the HTML on the server before serving to the client.  A "SPA + SSR" application is often called an ***isomorphic application***.  The application infrastructure is built with cloud agnostic Terraform modules and scripts.
 
 This combination of web techniques can take advantage of both SPA and SSR benefits.  Server-side rendering can improve application performance during degraded web conditions.  Other benefits include improved user experiences and accessibility, along with increased search engine optimization.  Additionally, utilizing single page application technologies to render only dynamic components on the client-side after the initial rendering can give a top-notch user experience with advanced web application designs.
 
@@ -13,22 +13,19 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
   * CSS
   * JavaScript
 
-#### Tools/Plugins/Frameworks
-| Name  | Use |
-| ------------- | ------------- |
-| JUnit  | Java unit testing  |
-| Jacaco  | Unit test coverage  |
-| SonarQube | Static code quality analysis  |
-| FindBugs  | Static code quality analysis  |
-| ESLint  | Static code quality analysis  |
-| PMD  | Static code quality analysis  |
-| Gradle  | Build tool  |
-| Java Spring Boot  | Application code framework |
-| OWASP Dependency Check | Security scan analysis |
-| OWASP Zap| Security scan analysis |
-| Clair | Security scan analysis |
-| Jenkins | Automated build tool |
-| Docker | Container / microservice framework |
+| Technical Highlights  |
+| ------------- |
+| Spring Boot application framework |
+| ReactJS SPA/SSR UI framework |
+| Gradle boostrap tooling and plugins|
+| Terraform modules and scripting |
+| Functional testing (Cucumber) framework |
+| CD/CI pipeline using Jenkins/Docker/Gradle|
+| AWS ECR (microservice cloud containers) configuration|
+| NodeJS, NPM, and Webpack usage within Gradle |
+| AuthO SSO secure integration within ReactUI|
+| RestAPI integration within ReactUI |
+| React Bootstrap integration within ReactUI |
 
 ## Application
 To run the application go to the Application [README](application/README.md)
