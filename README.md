@@ -15,7 +15,7 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | AWS ECR (microservice cloud containers) configuration|
 | NodeJS, NPM, and Webpack usage within Gradle |
 | AuthO SSO secure integration within ReactUI|
-| RestAPI integration within ReactUI |
+| REST API integration within ReactUI |
 | React Bootstrap integration within ReactUI |
 
 ## Application
