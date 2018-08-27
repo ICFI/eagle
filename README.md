@@ -14,9 +14,9 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | CD/CI pipeline using Jenkins/Docker/Gradle|
 | AWS ECR (microservice cloud containers) configuration|
 | NodeJS, NPM, and Webpack usage within Gradle |
-| AuthO SSO secure integration within ReactUI|
-| REST API integration within ReactUI |
-| React Bootstrap integration within ReactUI |
+| AuthO SSO secure integration within ReactJS|
+| REST API integration within ReactJS |
+| React Bootstrap integration within ReactJS |
 
 ## Application
 To run the application go to the Application [README](application/README.md)
