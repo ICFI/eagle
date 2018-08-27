@@ -8,7 +8,7 @@ This combination of web techniques can take advantage of both SPA and SSR benefi
 | ------------- |
 | Spring Boot application framework |
 | ReactJS SPA/SSR UI framework |
-| Gradle boostrap tooling and plugins|
+| Gradle bootstrap build tooling and plugins|
 | Terraform modules and scripting |
 | Functional testing (Cucumber) framework |
 | CD/CI pipeline using Jenkins/Docker/Gradle|
