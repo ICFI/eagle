@@ -4,15 +4,6 @@ The Eagle project is a single page application (SPA) built with ReactJS and Java
 
 This combination of web techniques can take advantage of both SPA and SSR benefits.  Server-side rendering can improve application performance during degraded web conditions.  Other benefits include improved user experiences and accessibility, along with increased search engine optimization.  Additionally, utilizing single page application technologies to render only dynamic components on the client-side after the initial rendering can give a top-notch user experience with advanced web application designs.
 
-### Technology Stack
-#### Languages
-  * Java 8
-  * ReactJS
-  * Terraform
-  * HTML
-  * CSS
-  * JavaScript
-
 | Technical Highlights  |
 | ------------- |
 | Spring Boot application framework |
